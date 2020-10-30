@@ -29,7 +29,7 @@ const UsuarioState = props => {
     const obtenerEmpleados = async () => {
         try {
             const response = await Axios.get('employees');
-            console.log('obteniendo empleados');
+            //console.log('obteniendo empleados');
             dispatch({
                 type: SELECT_EMPLEADOS,
                 payload: response.data.employees
@@ -47,7 +47,7 @@ const UsuarioState = props => {
             }
 
             const response = await Axios.get('users');
-            console.log('obteniendo usuarios ',response);
+            //console.log('obteniendo usuarios ',response);
             dispatch({
                 type: LISTAR_USUARIOS,
                 payload: response.data.users
@@ -58,15 +58,17 @@ const UsuarioState = props => {
     }
     
     const agregarUsuario = async usuario => {
-        console.log('usuario form ', usuario)
+        //console.log('usuario form ', usuario)
         try {
             const response = await Axios.post('users', usuario);
             console.log('guardando usuario ',response);
+            if(response.data.ok){
+                dispatch({
+                    type: AGREGAR_USUARIO,
+                    payload: usuario
+                })
+            }
             
-            dispatch({
-                type: AGREGAR_USUARIO,
-                payload: usuario
-            })
         } catch (error) {
             
             console.log(error);
@@ -74,7 +76,7 @@ const UsuarioState = props => {
     }
 
     const eliminarUsuario = async usuario => {
-        console.log('usuario a eliminar ', usuario)
+        //console.log('usuario a eliminar ', usuario)
         try {
             await Axios.delete(`users/delete/${usuario._id}`);
             dispatch({

@@ -22,7 +22,7 @@ export default function Usuarios(){
 
     useMemo(()=>{
         const result = usuarios.filter(usuario=>{
-            return `${usuario.username}
+            return `${usuario.username} 
                     ${usuario.role}`
                     .toLowerCase()
                     .includes(consulta.toLowerCase())
@@ -108,15 +108,15 @@ export default function Usuarios(){
                                         {
                                             filterUsuarios.length === 0
                                             ?
-                                            <tr>No hay usuarios</tr>
+                                            <tr><div className="alert alert-danger">No hay usuarios</div></tr>
                                             :
                                             (
-                                                filterUsuarios.map(usuario => {
+                                                filterUsuarios.map((usuario,i) => {
                                                     return(
-                                                    <tr key={usuario._id} >  
-                                                        <td>{usuario.employeeid.codeEmployee}</td>
-                                                        <td>{usuario.username}</td>
-                                                        <td>{usuario.role}</td>
+                                                    <tr key={i+usuario._id} >  
+                                                        <td key={Math.random()}>{usuario.employeeid.codeEmployee}</td>
+                                                        <td key={Math.random()}>{usuario.username}</td>
+                                                        <td key={Math.random()}>{usuario.role}</td>
                                                         <td className="text-nowrap text-center">
                                                             
                                                             <button

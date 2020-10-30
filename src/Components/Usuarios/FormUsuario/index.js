@@ -110,7 +110,7 @@ export default function FormularioUsuario(){
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="password">Contraseña</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="password" 
                                                     className="form-control"
                                                     name="password"
                                                     value={password}
