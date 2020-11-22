@@ -18,6 +18,10 @@ export default function Navbar(){
         history.push('/')
     }
 
+    const toggleFullScreen = ()=>{
+        return
+    }
+
     return (
         <header className="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
             <div className="m-header">
@@ -25,7 +29,7 @@ export default function Navbar(){
                 <Link to="#!" className="b-brand">
                     <img src={logo} alt="logo" className="logo"/>
                 </Link>
-                <Link to={`#!`} className="mob-toggler">
+                <Link to={`#!`} className="mob-toggler" onClick={toggleFullScreen}>
                     <i className="ti-more-alt"></i>
                 </Link>
             </div>
@@ -53,7 +57,8 @@ export default function Navbar(){
                                     </div>
                                 <ul className="pro-body">
                                     <li><Link to="#!" className="dropdown-item"><i className="ti-user"></i>Perfil</Link></li>
-                                    <li><button onClick={()=> cerrarSesionNav()} className="dropdown-item">
+                                    <li>
+                                        <button onClick={()=> cerrarSesionNav()} className="dropdown-item">
                                         <i className="ti-lock"></i>Cerrar Sesion
                                         </button>
                                     </li>
