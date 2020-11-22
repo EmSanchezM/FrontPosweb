@@ -149,7 +149,7 @@ export default function FormularioCategoria(){
                                 <div className="offset-sm-8 col-sm-10">
                                     <button type="submit" className="btn btn-primary">
                                         <i className="ti-save p-2"></i>
-                                       Agregar Categoria
+                                        {categoriaseleccionada ? 'Editar categoria': 'Agregar Categoria'}
                                     </button>
                                 </div>
                             </div>

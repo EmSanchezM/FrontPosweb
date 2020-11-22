@@ -33,7 +33,7 @@ export default function Categorias(){
 
     const seleccionarCategoria = categoria => {
         guardarCategoriaActual(categoria);
-        history.push('categorias/nuevo');
+        history.push('categorias/nueva');
     }
 
    
