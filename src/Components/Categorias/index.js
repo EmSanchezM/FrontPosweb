@@ -1,13 +1,15 @@
 import React,  { useContext, useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import categoriaContext from '../../Context/categorias/categoriaContext';
 import alertaContext from '../../Context/alertas/alertaContext';
 
 export default function Categorias(){
 
+    const history = useHistory();
+
     const CategoriaContext = useContext(categoriaContext);
-    const { categorias, obtenerCategorias, eliminarCategoria} = CategoriaContext;
+    const { categorias, obtenerCategorias, guardarCategoriaActual, eliminarCategoria} = CategoriaContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
@@ -28,6 +30,12 @@ export default function Categorias(){
         })
         setFilterCategorias(result);
     },[consulta, categorias])
+
+    const seleccionarCategoria = categoria => {
+        guardarCategoriaActual(categoria);
+        history.push('categorias/nuevo');
+    }
+
    
     const onClickEliminar = categoria => {
         confirm = window.confirm('¿Estas seguro de eliminarla?');
@@ -99,7 +107,7 @@ export default function Categorias(){
                                         <tr>
                                             <th>COD. Categoria</th>
                                             <th>Nombre categoria</th>
-                                            <th>Descripcion</th>
+                                            <th>Activa</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
                                     </thead>
@@ -113,14 +121,19 @@ export default function Categorias(){
                                                 filterCategorias.map((categoria,i) => {
                                                     return(
                                                     <tr key={i+categoria._id} >  
-                                                        <td key={Math.random()}>{categoria.codeCategory}</td>
-                                                        <td key={Math.random()}>{categoria.name}</td>
-                                                        <td key={Math.random()}>{categoria.description}</td>
+                                                        <td>{categoria.codeCategory}</td>
+                                                        <td>{categoria.name}</td>
+                                                        <td>{categoria.active ? 'Activa': 'Desactiva'}</td>
                                                         <td className="text-nowrap text-center">
-                                                            
                                                             <button
                                                                 data-toggle="tooltip" 
-                                                                className="btn btn-block btn-sm btn-danger sweet-multiple"
+                                                                className="btn btn-sm btn-warning"
+                                                                data-original-title="Editar"
+                                                                onClick={()=> seleccionarCategoria(categoria)}
+                                                            ><i className="ti-pencil"></i></button>
+                                                            <button
+                                                                data-toggle="tooltip" 
+                                                                className="btn btn-sm btn-danger"
                                                                 data-original-title="Borrar"
                                                                 onClick={()=>onClickEliminar(categoria)}
                                                             ><i className="ti-trash"></i></button>

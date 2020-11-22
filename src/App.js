@@ -8,6 +8,7 @@ import EmpleadoState from './Context/empleados/empleadoState';
 import ClienteState from './Context/clientes/clienteState';
 import ProveedorState from './Context/proveedores/proveedorState';
 import UsuarioState from './Context/usuarios/usuarioState';
+import CategoriaState from './Context/categorias/categoriaState';
 
 //Component ruta privada
 import RutaPrivada from './Components/rutas/RutaPrivada';
@@ -19,6 +20,7 @@ import PanelAdmin from 'Pages/PanelAdmin';
 function App() {
   return (
     <>
+    <CategoriaState>
     <UsuarioState>
     <EmpleadoState>
     <ClienteState>
@@ -37,6 +39,7 @@ function App() {
     </ClienteState>
     </EmpleadoState>
     </UsuarioState>
+    </CategoriaState>
     </>
   );
 }

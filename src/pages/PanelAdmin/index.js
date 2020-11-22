@@ -41,7 +41,7 @@ export default function PanelAdmin() {
                             <Route exact path={`/admin/proveedores`} component={Proveedores}/>
                             <Route exact path={`/admin/proveedores/nuevo`} component={FormularioProveedor}/>
                             <Route exact path={`/admin/categorias`} component={Categorias}/>
-                            <Route exact path={`/admin/categorias/nuevo`} component={FormularioCategoria}/>
+                            <Route exact path={`/admin/categorias/nueva`} component={FormularioCategoria}/>
                         </div>
 
                     </div>

@@ -102,8 +102,6 @@ export default function FormularioCategoria(){
                                 <div className="col-md-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h4 className="card-title">Categoria</h4>
-                                            <hr/>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="codeCategory">Codigo de categoria</label>
                                                 <input 
