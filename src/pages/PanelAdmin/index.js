@@ -20,6 +20,9 @@ import FormularioUsuario from '../../Components/Usuarios/FormUsuario';
 //CRUD categorias
 import Categorias from '../../Components/Categorias';
 import FormularioCategoria from '../../Components/Categorias/FormCategoria';
+//CRUD productos
+import Productos from '../../Components/Productos';
+import FormularioProducto from '../../Components/Productos/FormProducto';
 
 export default function PanelAdmin() {
 
@@ -42,6 +45,8 @@ export default function PanelAdmin() {
                             <Route exact path={`/admin/proveedores/nuevo`} component={FormularioProveedor}/>
                             <Route exact path={`/admin/categorias`} component={Categorias}/>
                             <Route exact path={`/admin/categorias/nueva`} component={FormularioCategoria}/>
+                            <Route exact path={`/admin/productos`} component={Productos}/>
+                            <Route exact path={`/admin/productos/nuevo`} component={FormularioProducto}/>
                         </div>
 
                     </div>

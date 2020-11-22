@@ -74,6 +74,12 @@ export default function Header(){
                                     <span className="pcoded-micon"><i className="ti-truck"></i></span>
                                     <span className="pcoded-mtext">Categorias</span>
                                 </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/productos'}>
+                                    <span className="pcoded-micon"><i className="ti-truck"></i></span>
+                                    <span className="pcoded-mtext">Productos</span>
+                                </Link>
                             </li>                           
                         </ul>
                     </div>

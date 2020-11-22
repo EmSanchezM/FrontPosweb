@@ -96,6 +96,15 @@ export default function FormularioCategoria(){
                         <div className="errores">
                         {errorcategoria ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
+                        {alerta ? 
+                        (
+                            <div className={`alert ${alerta.tipoAlerta}`}>
+                                {alerta.msg}
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">X</span>
+                                </button>
+                            </div>
+                        ): null}
                         
                         <form onSubmit={handleSubmit}>
                             <div className="row">

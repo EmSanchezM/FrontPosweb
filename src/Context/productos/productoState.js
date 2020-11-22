@@ -8,6 +8,8 @@ import {
     AGREGAR_PRODUCTO,
     VALIDAR_PRODUCTO,
     ACTUAL_PRODUCTO,
+    SELECT_CATEGORIAS,
+    SELECT_PROVEEDORES,
     ACTUALIZAR_PRODUCTO,
     ELIMINAR_PRODUCTO,
     LIMPIAR_PRODUCTO_SELECCIONADO
@@ -18,6 +20,8 @@ import Axios from '../../config/axios';
 const ProductoState = props => {
     const initalState = {
         productos: [],
+        categorias: [],
+        proveedores: [],
         errorproducto: false,
         productoseleccionado: null
     }
@@ -32,6 +36,36 @@ const ProductoState = props => {
                 type: LISTAR_PRODUCTOS,
                 payload: response.data.products
             })
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const obtenerCategorias = async () => {
+        try {
+            const response = await Axios.get('categories');
+            console.log('obteniendo categorias ',response);
+            dispatch({
+                type: SELECT_CATEGORIAS,
+                payload: response.data.categories
+            })
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const obtenerProveedores = async () => {
+        try {
+            const response = await Axios.get('suppliers');
+            //console.log('obteniendo proveedores ',response);
+            
+            dispatch({
+                type: SELECT_PROVEEDORES,
+                payload: response.data.suppliers
+            })
+            
             
         } catch (error) {
             console.log(error);
@@ -118,6 +152,8 @@ const ProductoState = props => {
                 eliminarProducto,
                 validarProducto,
                 guardarProductoActual,
+                obtenerCategorias,
+                obtenerProveedores,
                 limpiarProductoSeleccionado,
             }}
         >

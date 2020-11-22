@@ -1,49 +1,47 @@
 import React,  { useContext, useEffect, useState, useMemo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import categoriaContext from '../../Context/categorias/categoriaContext';
+import productoContext from '../../Context/productos/productoContext';
 import alertaContext from '../../Context/alertas/alertaContext';
 
-export default function Categorias(){
-
+export default function Productos(){
     const history = useHistory();
 
-    const CategoriaContext = useContext(categoriaContext);
-    const { categorias, obtenerCategorias, guardarCategoriaActual, eliminarCategoria} = CategoriaContext;
+    const ProductoContext = useContext(productoContext);
+    const { productos, obtenerProductos, guardarProductoActual, eliminarProducto } = ProductoContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
     let confirm;
 
     const [consulta, setConsulta] = useState('');
-    const [filterCategorias, setFilterCategorias] = useState(categorias);
-    
+    const [filterProductos, setFilterProductos] = useState(productos);
+
     useEffect(()=>{
-        obtenerCategorias();
-    }, [obtenerCategorias]);
+        obtenerProductos();
+    }, [obtenerProductos]);
 
     useMemo(()=>{
-        const result = categorias.filter(categoria=>{
-            return `${categoria.name}`
+        const result = productos.filter(producto=>{
+            return `${producto.name}`
                     .toLowerCase()
                     .includes(consulta.toLowerCase())
         })
-        setFilterCategorias(result);
-    },[consulta, categorias])
+        setFilterProductos(result);
+    },[consulta, productos])
 
-    const seleccionarCategoria = categoria => {
-        guardarCategoriaActual(categoria);
-        history.push('categorias/nueva');
+    const seleccionarProducto = producto => {
+        guardarProductoActual(producto);
+        history.push('productos/nuevo');
     }
 
-   
-    const onClickEliminar = categoria => {
-        confirm = window.confirm('¿Estas seguro de eliminarla?');
+    const onClickEliminar = producto => {
+        confirm = window.confirm('¿Estas seguro de eliminarlo?');
         
         if(confirm){
-            eliminarCategoria(categoria);
-            mostrarAlerta('Categoria eliminada exitosamente!', 'alert-success');
-            obtenerCategorias();
+            eliminarProducto(producto);
+            mostrarAlerta('Producto eliminado exitosamente!', 'alert-success');
+            obtenerProductos();
             return;
         }       
     }
@@ -71,7 +69,7 @@ export default function Categorias(){
                                     <input 
                                         type="text"
                                         className="form-control"
-                                        placeholder="Buscar categoria..."
+                                        placeholder="Buscar producto..."
                                         name="consulta"
                                         value={consulta}
                                         onChange={e=> setConsulta(e.target.value)}
@@ -90,11 +88,11 @@ export default function Categorias(){
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-8">
-                                    <h4 className="card-title">Categorias( {categorias.length} )</h4>
+                                    <h4 className="card-title">Productos( {productos.length} )</h4>
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-sm btn-primary" to='/admin/categorias/nueva'>
+                                        <Link className="btn btn-sm btn-primary" to='/admin/productos/nuevo'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
                                             <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
@@ -105,37 +103,39 @@ export default function Categorias(){
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>COD. Categoria</th>
-                                            <th>Nombre categoria</th>
-                                            <th>Estado</th>
+                                            <th>COD. Producto</th>
+                                            <th>Nombre Producto</th>
+                                            <th>Descripción</th>
+                                            <th>Stock</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            filterCategorias.length === 0
+                                            filterProductos.length === 0
                                             ?
-                                            <tr><div className="alert alert-danger">No hay categorias</div></tr>
+                                            <tr><div className="alert alert-danger">No hay productos</div></tr>
                                             :
                                             (
-                                                filterCategorias.map((categoria,i) => {
+                                                filterProductos.map(producto => {
                                                     return(
-                                                    <tr key={i+categoria._id} >  
-                                                        <td>{categoria.codeCategory}</td>
-                                                        <td>{categoria.name}</td>
-                                                        <td>{categoria.active ? 'Activa': 'Desactiva'}</td>
+                                                    <tr key={producto._id}>  
+                                                        <td>{producto.codeProduct}</td>
+                                                        <td>{producto.name}</td>
+                                                        <td>{producto.description}</td>
+                                                        <td>{producto.inStock}</td>
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-warning"
                                                                 data-original-title="Editar"
-                                                                onClick={()=> seleccionarCategoria(categoria)}
+                                                                onClick={()=> seleccionarProducto(producto)}
                                                             ><i className="ti-pencil"></i></button>
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"
                                                                 data-original-title="Borrar"
-                                                                onClick={()=>onClickEliminar(categoria)}
+                                                                onClick={()=>onClickEliminar(producto)}
                                                             ><i className="ti-trash"></i></button>
                                                         </td>
                                                     </tr> 
@@ -150,6 +150,10 @@ export default function Categorias(){
                     </div>
                 </div>
             </div>
-      </>
+      
+        
+        </>
     )
+
+    
 }

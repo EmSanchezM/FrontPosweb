@@ -3,6 +3,8 @@ import {
     AGREGAR_PRODUCTO,
     VALIDAR_PRODUCTO,
     ACTUAL_PRODUCTO,
+    SELECT_CATEGORIAS,
+    SELECT_PROVEEDORES,
     ACTUALIZAR_PRODUCTO,
     ELIMINAR_PRODUCTO,
     LIMPIAR_PRODUCTO_SELECCIONADO
@@ -31,6 +33,16 @@ export default (state, action) => {
             return {
                 ...state,
                 productoseleccionado: action.payload
+            }
+        case SELECT_CATEGORIAS:
+            return {
+                ...state,
+                categorias: action.payload
+            }
+        case SELECT_PROVEEDORES:
+            return {
+                ...state,
+                proveedores: action.payload
             }
         case ACTUALIZAR_PRODUCTO:
             return {
