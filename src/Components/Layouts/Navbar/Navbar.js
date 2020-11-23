@@ -15,7 +15,8 @@ export default function Navbar(){
 
     const cerrarSesionNav = ()=>{
         cerrarSesion();
-        history.push('/')
+        history.push('/');
+        window.location.reload();
     }
 
     const toggleFullScreen = ()=>{
@@ -47,7 +48,7 @@ export default function Navbar(){
                                     (
                                         <>
                                         <img src={userImg} alt="user-default" className="rounded-circle"/>
-                                        <span>{usuarioAuth.username}</span>
+                                        <span>{usuarioAuth?.username}</span>
                                         <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
                                         </>
                                     )
