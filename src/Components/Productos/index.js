@@ -97,6 +97,13 @@ export default function Productos(){
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
                                             <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
+                                        <button className="btn btn-sm btn-primary m-2"
+                                                data-toggle="modal"
+                                                data-target="#modalVerMas"
+                                        >
+                                            <span className="pcoded-micon"><i className="ti-plus"></i></span>
+                                            <span className="pcoded-mtext p-2">Ver mas..</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +158,65 @@ export default function Productos(){
                     </div>
                 </div>
             </div>
-      
+            <div id="modalVerMas" 
+                 className="modal fade"
+                 tabIndex="-1"
+                 role="dialog"
+                 aria-modal="true"
+            >
+                <div className="modal-dialog modal-lg" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Más datos...</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="table-responsive">
+                            <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Costo</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Precio Minorista</th>
+                                            <th>Precio Mayorista</th>
+                                            <th>Precio descuento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            filterProductos.length === 0
+                                            ?
+                                            <tr>No hay productos</tr>
+                                            :
+                                            (
+                                                filterProductos.map((producto, i) => {
+                                                    return(
+                                                    <tr key={i} >  
+                                                        <td>{producto.cost} Lps.</td>
+                                                        <td>{producto.price1} Lps.</td>
+                                                        <td>{producto.price2} Lps.</td>
+                                                        <td>{producto.price3} Lps.</td>
+                                                        <td>{producto.price4} Lps.</td>
+                                                    </tr> 
+                                                    )
+                                                })
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal" aria-label="close">
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>    
+            </div>     
+       
         
         </>
     )
