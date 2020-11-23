@@ -23,7 +23,8 @@ export default function Productos(){
 
     useMemo(()=>{
         const result = productos.filter(producto=>{
-            return `${producto.name}`
+            return `${producto.name}
+                    ${producto.codeProduct}`
                     .toLowerCase()
                     .includes(consulta.toLowerCase())
         })
