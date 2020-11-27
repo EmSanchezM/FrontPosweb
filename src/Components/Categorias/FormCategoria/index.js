@@ -7,7 +7,7 @@ import AlertaContext from '../../../Context/alertas/alertaContext';
 import RecursiveTreeView from './TreeView';
 
 export default function FormularioCategoria(){
-    const history = useHistory()
+    const history = useHistory();
 
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
@@ -21,7 +21,25 @@ export default function FormularioCategoria(){
     })
 
     const CategoriaContext = useContext(categoriaContext);
-    const { categoriaseleccionada, errorcategoria, actualizarCategoria,  agregarCategoria, validarCategoria } = CategoriaContext;
+    const { categoriaseleccionada, errorcategoria, actualizarCategoria,  agregarCategoria, validarCategoria, categorias, obtenerCategorias } = CategoriaContext;
+
+    useEffect(()=>{
+        obtenerCategorias();
+    },[obtenerCategorias])
+
+    
+    const data = {
+        id: 'root',
+        name: 'Menu',
+        children: [],
+    };
+    
+    categorias.map(categoria => {
+        data.children.push({
+            id: categoria._id,
+            name: categoria.name
+        })  
+    })
 
     useEffect(()=>{
         if(categoriaseleccionada !== null){
@@ -31,7 +49,7 @@ export default function FormularioCategoria(){
                 name: '',
                 codeCategory: '',
                 description: '',
-                parentId: 1,
+                parentId: 0,
                 active: true
             };
             const {_id, codeCategory, name, description, active} = categoriaseleccionada;
@@ -40,7 +58,7 @@ export default function FormularioCategoria(){
             categoriaActualizar.name = name
             categoriaActualizar.description = description
             categoriaActualizar.codeCategory = codeCategory
-            categoriaActualizar.parentId = 1
+            categoriaActualizar.parentId = 0
             categoriaActualizar.active = active
 
             setCategoria(categoriaActualizar)
@@ -56,7 +74,7 @@ export default function FormularioCategoria(){
         }
     }, [categoriaseleccionada])
 
-    const { active, codeCategory, name, description } = categoria
+    const { parentId, active, codeCategory, name, description } = categoria
     
     const onChange = e =>{
         setCategoria({
@@ -114,7 +132,7 @@ export default function FormularioCategoria(){
                                     <div className="card">
                                         <div className="card-body">
                                             <div className="form-group col-md-8">
-                                                <label htmlFor="codeCategory">Codigo de categoria</label>
+                                                <label htmlFor="codeCategory">Código de categoría</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -125,7 +143,7 @@ export default function FormularioCategoria(){
                                                 />
                                             </div>
                                             <div className="form-group col-md-8">
-                                                <label htmlFor="name">Nombre de categoria</label>
+                                                <label htmlFor="name">Nombre de categoría</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -135,7 +153,7 @@ export default function FormularioCategoria(){
                                                     placeholder="Nombre de categoria"/>
                                             </div>
                                             <div className="form-group col-md-8">
-                                                <label htmlFor="description">Descripcion</label>
+                                                <label htmlFor="description">Descripción</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -163,10 +181,11 @@ export default function FormularioCategoria(){
                                                     type="text" 
                                                     className="form-control"
                                                     name="parentId"
+                                                    value={parentId}
                                                     placeholder="Categoría padre"
                                                 />
                                             </div>
-                                            <RecursiveTreeView/>
+                                            <RecursiveTreeView data={data} parentId={parentId}/>
                                         </div>
                                     </div>
                                 </div>
