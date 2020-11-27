@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import categoriaContext from '../../../Context/categorias/categoriaContext';
 import AlertaContext from '../../../Context/alertas/alertaContext';
 
+import RecursiveTreeView from './TreeView';
+
 export default function FormularioCategoria(){
     const history = useHistory()
 
@@ -54,7 +56,7 @@ export default function FormularioCategoria(){
         }
     }, [categoriaseleccionada])
 
-    const { parentId, active, codeCategory, name, description } = categoria
+    const { active, codeCategory, name, description } = categoria
     
     const onChange = e =>{
         setCategoria({
@@ -108,7 +110,7 @@ export default function FormularioCategoria(){
                         
                         <form onSubmit={handleSubmit}>
                             <div className="row">
-                                <div className="col-md-12">
+                                <div className="col-md-6">
                                     <div className="card">
                                         <div className="card-body">
                                             <div className="form-group col-md-8">
@@ -131,7 +133,6 @@ export default function FormularioCategoria(){
                                                     value={name}
                                                     onChange={onChange} 
                                                     placeholder="Nombre de categoria"/>
-                                                {alerta ? (<small className={`alerta ${alerta.tipoAlerta}`}> {alerta.msg} </small>): null}
                                             </div>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="description">Descripcion</label>
@@ -150,6 +151,22 @@ export default function FormularioCategoria(){
                                                 </div>
                                                 <label htmlFor="">Activo</label>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="form-group col-md-12">
+                                                <label htmlFor="parentId">Categoría padre</label>
+                                                <input 
+                                                    type="text" 
+                                                    className="form-control"
+                                                    name="parentId"
+                                                    placeholder="Categoría padre"
+                                                />
+                                            </div>
+                                            <RecursiveTreeView/>
                                         </div>
                                     </div>
                                 </div>

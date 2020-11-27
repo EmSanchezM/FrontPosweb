@@ -193,7 +193,7 @@ export default function Productos(){
                                             (
                                                 filterProductos.map((producto, i) => {
                                                     return(
-                                                    <tr key={i} >  
+                                                    <tr key={i}>  
                                                         <td>{producto.cost} Lps.</td>
                                                         <td>{producto.price1} Lps.</td>
                                                         <td>{producto.price2} Lps.</td>
