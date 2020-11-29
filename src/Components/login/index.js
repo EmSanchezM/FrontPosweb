@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import Spinner from '../Spinner';
+import TextoError from '../Errors';
 
 import AuthContext from '../../Context/autenticacion/authContext';
 import AlertaContext from '../../Context/alertas/alertaContext';
@@ -59,14 +60,10 @@ export default function Login(props){
         console.log('submit props ', submitProps);
 
         setLoading(true)
-        //Validaciones
-        if(username.trim()==='' || password.trim()===''){
-            mostrarAlerta('El nombre de usuario y la contraseña son obligatorios', 'alert-danger alert-dismissible fade show');
-        }
-        submitProps.setSubmitting(false);
 
         iniciarSesion(usuario);
-        
+        submitProps.setSubmitting(false);
+        submitProps.resetForm();
         setLoading(false);
     }
 
@@ -111,7 +108,7 @@ export default function Login(props){
                                                 id="username"
                                                 placeholder="Nombre de usuario"
                                         />
-                                        <ErrorMessage name='username' className='alert alert-danger'/>
+                                        <ErrorMessage name='username' component={TextoError}/>
                                     </div>
                                     <div className="form-group mb-4">
                                         <Field type="password" 
@@ -120,7 +117,7 @@ export default function Login(props){
                                                id="password" 
                                                placeholder="Contraseña"
                                         />
-                                        <ErrorMessage name='password' className='alert alert-danger'/>
+                                        <ErrorMessage name='password' component={TextoError}/>
                                     </div>
                                     <button type="submit" className="btn btn-block btn-primary mb-4">
                                         Iniciar Sesion
