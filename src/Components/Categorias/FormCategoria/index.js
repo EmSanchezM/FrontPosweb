@@ -97,12 +97,14 @@ export default function FormularioCategoria(){
          if(categoriaseleccionada === null){
             agregarCategoria(categoria);
             mostrarAlerta('Categoria agregada exitosamente!', 'alert-success');
+            obtenerCategorias();
             //Redirigimos a la tabla de ver categoria
             history.push('/admin/categorias');
             
         }else{
             actualizarCategoria(categoria);
             mostrarAlerta('Categoria actualizada exitosamente!', 'alert-success')
+            obtenerCategorias();
             history.push('/admin/categorias');
         }
     }
