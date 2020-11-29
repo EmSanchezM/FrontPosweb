@@ -12,6 +12,8 @@ export default function FormularioCategoria(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
+    const [loop, setLoop] = useState(0);
+
     const [categoria, setCategoria] = useState({
         parentId: '',
         active: true,
@@ -25,7 +27,7 @@ export default function FormularioCategoria(){
 
     useEffect(()=>{
         obtenerCategorias();
-    },[obtenerCategorias])
+    },[loop])
 
     
     const data = {

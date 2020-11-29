@@ -15,6 +15,8 @@ export default function FormularioProducto(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
+    const [loop, setLoop] = useState(0);
+
     const [producto, setProducto] = useState({
         step:1,
         codeProduct:'',
@@ -49,14 +51,14 @@ export default function FormularioProducto(){
 
     const ProveedorContext = useContext(proveedorContext);
     const { proveedores, obtenerProveedores } = ProveedorContext;
-
+    
     useEffect(()=>{
         obtenerCategorias();
-    },[obtenerCategorias])
+    },[loop])
     
     useEffect(()=>{
         obtenerProveedores();
-    },[obtenerProveedores])
+    },[loop])
 
     /*
     nextStep = () => {
@@ -183,14 +185,26 @@ export default function FormularioProducto(){
                                             <label htmlFor="category">Categoria</label>
                                             <select name="categoryId" onChange={onChange} className="form-control">
                                                 <option value="">Seleccione la categoria</option>
-                                                {categorias?.map(categoria=>(
-                                                    <option
-                                                        key={categoria._id}
-                                                        value={categoria._id}
-                                                    >
-                                                        {categoria.name} 
-                                                    </option>
-                                                ))}
+                                                {productoseleccionado ? (
+                                                    categorias?.map(categoria=>(
+                                                        <option
+                                                            key={categoria._id}
+                                                            value={categoria._id}
+                                                            selected={categoria._id === productoseleccionado.categoryId}
+                                                        >
+                                                            {categoria.name} 
+                                                        </option>
+                                                    ))
+                                                ): (
+                                                    categorias?.map(categoria=>(
+                                                        <option
+                                                            key={categoria._id}
+                                                            value={categoria._id}
+                                                        >
+                                                            {categoria.name} 
+                                                        </option>
+                                                    ))
+                                                )}
                                             </select>
                                         </div>
                                         <div className="form-group col-md-12">
@@ -309,14 +323,28 @@ export default function FormularioProducto(){
                                             <label htmlFor="proveedor">Proveedor</label>
                                             <select name="supplierId" onChange={onChange} className="form-control">
                                                 <option value="">Seleccione el proveedor</option>
-                                                {proveedores?.map(proveedor=>(
-                                                    <option
-                                                        key={proveedor._id}
-                                                        value={proveedor._id}
-                                                    >
-                                                        {proveedor.companyName} 
-                                                    </option>
-                                                ))}
+                                                {productoseleccionado ? (
+                                                    proveedores?.map(proveedor=>(
+                                                        <option
+                                                            key={proveedor._id}
+                                                            value={proveedor._id}
+                                                            selected={proveedor._id === productoseleccionado.supplierId}
+                                                        >
+                                                            {proveedor.companyName} 
+                                                        </option>
+                                                    ))
+                                                ):
+                                                (
+                                                    proveedores?.map(proveedor=>(
+                                                        <option
+                                                            key={proveedor._id}
+                                                            value={proveedor._id}
+                                                        >
+                                                            {proveedor.companyName} 
+                                                        </option>
+                                                    ))
+                                                )
+                                                }    
                                             </select>
                                         </div>
                                         <div className="form-group col-md-12">

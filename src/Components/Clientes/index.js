@@ -19,9 +19,11 @@ export default function Empleados(){
     const [consulta, setConsulta] = useState('');
     const [filterClientes, setFilterClientes] = useState(clientes);
 
+    const [loop, setLoop] = useState(0);
+
     useEffect(()=>{
         obtenerClientes();
-    }, [obtenerClientes]);
+    }, [loop]);
 
     useMemo(()=>{
         const result = clientes.filter(cliente=>{

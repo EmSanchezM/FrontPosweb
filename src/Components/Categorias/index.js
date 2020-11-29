@@ -18,9 +18,10 @@ export default function Categorias(){
     const [consulta, setConsulta] = useState('');
     const [filterCategorias, setFilterCategorias] = useState(categorias);
     
+    const [loop, setLoop] = useState(0);
     useEffect(()=>{
         obtenerCategorias();
-    }, [obtenerCategorias]);
+    }, [loop]);
 
     useMemo(()=>{
         const result = categorias.filter(categoria=>{

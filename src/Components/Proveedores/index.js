@@ -13,6 +13,8 @@ export default function Proveedores(){
 
     const alertContext = useContext(AlertContext);
     const {alerta, mostrarAlerta } = alertContext;
+
+    const [loop, setLoop] = useState(0);
     //Para buscar entre proveedores
     const [consulta, setConsulta] = useState('');
     const [filterProveedores, setFilterProveedores] = useState(proveedores);
@@ -21,7 +23,7 @@ export default function Proveedores(){
 
     useEffect(()=>{
         obtenerProveedores();
-    }, [obtenerProveedores])
+    }, [loop])
 
     const seleccionarProveedor = proveedor => {
         guardarProveedorActual(proveedor);

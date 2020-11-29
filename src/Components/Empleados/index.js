@@ -20,9 +20,10 @@ export default function Empleados(){
     //Bolean para alerta confirmar que se elimina
     let confirm;
 
+    const [loop, setLoop] = useState(0);
     useEffect(()=>{
         obtenerEmpleados();
-    }, [obtenerEmpleados])
+    }, [loop])
 
     useMemo(()=>{
         const result = empleados.filter(empleado=>{

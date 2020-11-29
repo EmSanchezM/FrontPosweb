@@ -13,12 +13,14 @@ export default function Usuarios(){
     const {alerta, mostrarAlerta} = AlertaContext;
     let confirm;
 
+    const [loop, setLoop] = useState(0)
+
     const [consulta, setConsulta] = useState('');
     const [filterUsuarios, setFilterUsuarios] = useState(usuarios);
     
     useEffect(()=>{
         obtenerUsuarios();
-    }, [obtenerUsuarios]);
+    }, [loop]);
 
     useMemo(()=>{
         const result = usuarios.filter(usuario=>{
