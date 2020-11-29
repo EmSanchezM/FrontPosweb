@@ -37,7 +37,7 @@ export default function FormularioCliente(){
     })
 
     const ClienteContext = useContext(clienteContext);
-    const {clienteseleccionado, errorcliente, agregarCliente, actualizarCliente, validarCliente} = ClienteContext;
+    const {clienteseleccionado, errorcliente, agregarCliente, actualizarCliente, validarCliente, obtenerClientes} = ClienteContext;
 
     useEffect(()=>{
         if(clienteseleccionado !== null){
@@ -170,12 +170,14 @@ export default function FormularioCliente(){
         if(clienteseleccionado === null){
             agregarCliente(cliente);
             mostrarAlerta('Cliente agregado exitosamente!', 'alert-success');
+            obtenerClientes();
             //Redirigimos a la tabla de ver empleados
             history.push('/admin/clientes');
             
         }else{
             actualizarCliente(cliente);
-            mostrarAlerta('Cliente actualizado exitosamente!', 'alert-success')
+            mostrarAlerta('Cliente actualizado exitosamente!', 'alert-success');
+            obtenerClientes();
             history.push('/admin/clientes');
         }
 

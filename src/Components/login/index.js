@@ -1,5 +1,7 @@
 import React, {useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import Spinner from '../Spinner';
 
@@ -29,16 +31,16 @@ export default function Login(props){
         
     },[role, autenticado, history])
 
-    /*useEffect(()=>{
-        if(mensaje){ 
-            mostrarAlerta('Credenciales incorrectas!', mensaje.tipoAlerta); 
-        }
-    },[mensaje,mostrarAlerta])*/
-
+    
     const [usuario, setUsuario] = useState({
         username: '',
         password: ''
     });
+
+    const validationSchema = Yup.object({
+        username: Yup.string().required('El nombre de usuario es obligatorio'),
+        password: Yup.string().required('La contraseña es un campo obligatorio')
+    })
 
     const [loading, setLoading] = useState(false);
 
@@ -51,17 +53,20 @@ export default function Login(props){
         })
     }
     
-    const handleSubmit = e =>{
-        e.preventDefault();
-        //console.log(username, password);
+    const handleSubmit = (usuario, submitProps) =>{
+        
+        console.log(usuario);
+        console.log('submit props ', submitProps);
+
         setLoading(true)
         //Validaciones
         if(username.trim()==='' || password.trim()===''){
             mostrarAlerta('El nombre de usuario y la contraseña son obligatorios', 'alert-danger alert-dismissible fade show');
         }
+        submitProps.setSubmitting(false);
 
-        iniciarSesion({username, password});
-
+        iniciarSesion(usuario);
+        
         setLoading(false);
     }
 
@@ -93,27 +98,35 @@ export default function Login(props){
                                 <h4 className="mb-3 f-w-400">Iniciar Sesion</h4>
                                 <hr/>
                                  
-                                <form  onSubmit={handleSubmit}>
+                                <Formik
+                                    initialValues={usuario}
+                                    validationSchema={validationSchema}  
+                                    onSubmit={handleSubmit}
+                                >
+                                <Form>
                                     <div className="form-group mb-3">
-                                        <input  type="text" 
+                                        <Field  type="text" 
                                                 className="form-control"
                                                 name="username"
-                                                value={username} 
-                                                onChange={onChange}
-                                                placeholder="Nombre de usuario"/>
+                                                id="username"
+                                                placeholder="Nombre de usuario"
+                                        />
+                                        <ErrorMessage name='username' className='alert alert-danger'/>
                                     </div>
                                     <div className="form-group mb-4">
-                                        <input type="password" 
+                                        <Field type="password" 
                                                className="form-control"
                                                name="password" 
-                                               value={password} 
-                                               onChange={onChange}
-                                               placeholder="Contraseña"/>
+                                               id="password" 
+                                               placeholder="Contraseña"
+                                        />
+                                        <ErrorMessage name='password' className='alert alert-danger'/>
                                     </div>
-                                    <button className="btn btn-block btn-primary mb-4">
+                                    <button type="submit" className="btn btn-block btn-primary mb-4">
                                         Iniciar Sesion
                                     </button>
-                                </form>
+                                </Form>
+                                </Formik>
                             </div>
                         </div>
                     </div>
