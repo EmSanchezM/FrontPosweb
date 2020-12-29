@@ -21,9 +21,10 @@ const AuthState = props =>{
     const iniciarSesion = async data =>{
         try {
             const response = await Axios.post('auth/login', data);
-            console.log(response.data);
+            console.log(response);
 
-            if(response.data.ok===false){
+            if(response.status===400){
+                console.log(response.data)
                 const alerta = {
                     msg: response.data.errors,
                     tipoAlerta: 'alert-danger alert-dismissible fade show'

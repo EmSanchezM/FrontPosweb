@@ -83,7 +83,7 @@ export default function Header(){
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link pcoded-hasmenu" to={'/admin/bodegas'}>
-                                    <span className="pcoded-micon"><i className="ti-archive"></i></span>
+                                    <span className="pcoded-micon"><i className="ti-package"></i></span>
                                     <span className="pcoded-mtext">Bodegas</span>
                                 </Link>
                             </li>                           
