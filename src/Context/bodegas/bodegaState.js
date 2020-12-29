@@ -26,11 +26,11 @@ const BodegaState = props => {
 
     const obtenerBodegas = async () => {
         try {
-            const response = await Axios.get('products');
+            const response = await Axios.get('warehouses');
             console.log('obteniendo Bodegas ',response);
             dispatch({
                 type: LISTAR_BODEGAS,
-                payload: response.data.products
+                payload: response.data.bodegas
             })
             
         } catch (error) {
@@ -39,10 +39,9 @@ const BodegaState = props => {
     }
  
     const agregarBodega = async bodega => {
-        //console.log(empleado)
         try {
-            const response = await Axios.post('products', bodega);
-            //console.log('guardando empleado ',response);
+            const response = await Axios.post('warehouses', bodega);
+            
             if(response.ok){
                 dispatch({
                     type: AGREGAR_BODEGA,
@@ -59,10 +58,10 @@ const BodegaState = props => {
     }
 
     const actualizarBodega = async bodega => {
-        //console.log('empleado a actualizar ', empleado)
+        
         try {
-            const response = await Axios.put(`products/update/${bodega._id}`, bodega);
-            //console.log(response);
+            const response = await Axios.put(`warehouses/update/${bodega._id}`, bodega);
+            
             if(response.ok){
                 dispatch({
                     type: ACTUALIZAR_BODEGA,
@@ -75,9 +74,9 @@ const BodegaState = props => {
     }
 
     const eliminarBodega = async bodega => {
-        //console.log('empleado a actualizar ', empleado)
+        
         try {
-            await Axios.delete(`products/delete/${bodega._id}`);
+            await Axios.delete(`warehouses/delete/${bodega._id}`);
             dispatch({
                 type: ELIMINAR_BODEGA,
                 payload: bodega._id

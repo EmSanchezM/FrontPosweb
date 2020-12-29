@@ -10,7 +10,7 @@ import ProveedorState from './Context/proveedores/proveedorState';
 import UsuarioState from './Context/usuarios/usuarioState';
 import CategoriaState from './Context/categorias/categoriaState';
 import ProductoState from './Context/productos/productoState';
-
+import BodegaState from './Context/bodegas/bodegaState';
 //Component ruta privada
 import RutaPrivada from './Components/rutas/RutaPrivada';
 
@@ -21,6 +21,7 @@ import PanelAdmin from 'Pages/PanelAdmin';
 function App() {
   return (
     <>
+    <BodegaState>
     <ProductoState>
     <CategoriaState>
     <UsuarioState>
@@ -43,6 +44,7 @@ function App() {
     </UsuarioState>
     </CategoriaState>
     </ProductoState>
+    </BodegaState>
     </>
   );
 }

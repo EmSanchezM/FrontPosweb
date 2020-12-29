@@ -80,6 +80,12 @@ export default function Header(){
                                     <span className="pcoded-micon"><i className="ti-shopping-cart"></i></span>
                                     <span className="pcoded-mtext">Productos</span>
                                 </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/bodegas'}>
+                                    <span className="pcoded-micon"><i className="ti-archive"></i></span>
+                                    <span className="pcoded-mtext">Bodegas</span>
+                                </Link>
                             </li>                           
                         </ul>
                     </div>
