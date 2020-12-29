@@ -1,51 +1,51 @@
-import React,  { useContext, useEffect, useMemo } from 'react';
-import { useState } from 'react';
+import React,  { useContext, useEffect, useState, useMemo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import bodegaContext from '../../Context/bodegas/bodegaContext';
 import alertaContext from '../../Context/alertas/alertaContext';
-import clienteContext from '../../Context/clientes/clienteContext';
 
-export default function Empleados(){
+export default function Bodegas(){
     const history = useHistory();
 
-    const ClienteContext = useContext(clienteContext);
-    const { clientes, obtenerClientes, guardarClienteActual, eliminarCliente } = ClienteContext;
+    const [loop, setLoop] = useState(0)
+
+    const BodegaContext = useContext(bodegaContext);
+    const { bodegas, obtenerBodegas, guardarBodegaActual, eliminarBodega } = BodegaContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
-
     let confirm;
 
     const [consulta, setConsulta] = useState('');
-    const [filterClientes, setFilterClientes] = useState(clientes);
+    const [filterBodegas, setFilterBodegas] = useState(bodegas);
 
     useEffect(()=>{
-        obtenerClientes();
-    }, []);
+        obtenerBodegas();
+    }, [loop]);
 
     useMemo(()=>{
-        const result = clientes.filter(cliente=>{
-            return `${cliente.personid.name} 
-                    ${cliente.personid.lastname}`
+        const result = bodegas.filter(bodega=>{
+            return `${bodega.name}`
                     .toLowerCase()
                     .includes(consulta.toLowerCase())
         })
-        setFilterClientes(result);
-    },[consulta, clientes])
+        setFilterbodegas(result);
+    },[consulta, bodegas])
 
-    const seleccionarCliente = cliente => {
-        guardarClienteActual(cliente);
-        history.push('clientes/nuevo');
+    const seleccionarBodega = bodega => {
+        guardarBodegaActual(bodega);
+        history.push('bodegas/nuevo');
     }
 
-    const onClickEliminar = cliente => {
+    const onClickEliminar = bodega => {
         confirm = window.confirm('¿Estas seguro de eliminarlo?');
+        
         if(confirm){
-            eliminarCliente(cliente);
-            mostrarAlerta('Cliente eliminado exitosamente!', 'alert-success');
-            obtenerClientes();
+            eliminarBodega(bodega);
+            mostrarAlerta('Bodega eliminado exitosamente!', 'alert-success');
+            obtenerbodegas();
             return;
-        }        
+        }       
     }
 
     return(
@@ -53,8 +53,8 @@ export default function Empleados(){
             <div className="row">
                 <div className="col-12">
                     <div className="card">
-                        <div className="card-body"> 
-                        {alerta ?
+                        <div className="card-body">
+                            {alerta ?
                             (
                                 <div className={`alert ${alerta.tipoAlerta}`}>
                                     {alerta.msg}
@@ -64,22 +64,22 @@ export default function Empleados(){
                                 </div>
                             )
                             : 
-                            (    
-                                <div className="input-group">
+                            (    <div className="input-group">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text"><i className="ti-search"></i></div>
                                     </div>
                                     <input 
                                         type="text"
                                         className="form-control"
-                                        placeholder="Buscar cliente..."
+                                        placeholder="Buscar Bodega..."
                                         name="consulta"
                                         value={consulta}
                                         onChange={e=> setConsulta(e.target.value)}
                                     />
                                 </div>
-                                )
+                            )
                             }
+
                         </div>
                     </div>
                 </div>
@@ -90,11 +90,11 @@ export default function Empleados(){
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-8">
-                                    <h4 className="card-title">Clientes( {clientes.length} )</h4>
+                                    <h4 className="card-title">Bodegas( {bodegas.length} )</h4>
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-sm btn-primary m-2" to='/admin/clientes/nuevo'>
+                                        <Link className="btn btn-sm btn-primary" to='/admin/bodegas/nuevo'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
                                             <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
@@ -112,41 +112,39 @@ export default function Empleados(){
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>COD. Cliente</th>
-                                            <th>Nombre</th>
-                                            <th>No.Identidad</th>
-                                            <th>Limite de Credito</th>
-                                            <th>Nivel de precio</th>
+                                            <th>COD. Bodega</th>
+                                            <th>Nombre Bodega</th>
+                                            <th>Descripción</th>
+                                            <th>Stock</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            filterClientes.length === 0
+                                            filterBodegas.length === 0
                                             ?
-                                            <tr>No hay clientes</tr>
+                                            <tr><div className="alert alert-danger">No hay bodegas</div></tr>
                                             :
                                             (
-                                                filterClientes.map(cliente => {
+                                                filterBodegas.map(Bodega => {
                                                     return(
-                                                    <tr key={cliente._id} >  
-                                                        <td>{cliente.codeCustomer}</td>
-                                                        <td>{cliente.personid.name} {cliente.personid.lastname}</td>
-                                                        <td>{cliente.personid.identidad}</td>
-                                                        <td>{cliente.creditLimit} LPS.</td>
-                                                        <td>{cliente.levelPrice}</td>
+                                                    <tr key={bodega._id}>  
+                                                        <td>{bodega.codeProduct}</td>
+                                                        <td>{bodega.name}</td>
+                                                        <td>{bodega.description}</td>
+                                                        <td>{bodega.inStock}</td>
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-warning"
                                                                 data-original-title="Editar"
-                                                                onClick={()=> seleccionarCliente(cliente)}
+                                                                onClick={()=> seleccionarBodega(bodega)}
                                                             ><i className="ti-pencil"></i></button>
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"
                                                                 data-original-title="Borrar"
-                                                                onClick={()=>onClickEliminar(cliente)}
+                                                                onClick={()=>onClickEliminar(bodega)}
                                                             ><i className="ti-trash"></i></button>
                                                         </td>
                                                     </tr> 
@@ -161,7 +159,6 @@ export default function Empleados(){
                     </div>
                 </div>
             </div>
-
             <div id="modalVerMas" 
                  className="modal fade"
                  tabIndex="-1"
@@ -181,31 +178,28 @@ export default function Empleados(){
                             <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Telefono</th>
-                                            <th>Fecha Nacimiento</th>
-                                            <th>Email</th>
-                                            <th>País</th>
-                                            <th>Ciudad</th>
-                                            <th>Colonia</th>
-                                            
+                                            <th>Costo</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Precio Minorista</th>
+                                            <th>Precio Mayorista</th>
+                                            <th>Precio descuento</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            clientes.length === 0
+                                            filterBodegas.length === 0
                                             ?
-                                            <tr>No hay clientes</tr>
+                                            <tr>No hay bodegas</tr>
                                             :
                                             (
-                                                clientes.map((cliente, i) => {
+                                                filterBodegas.map((bodega, i) => {
                                                     return(
-                                                    <tr key={i} >  
-                                                        <td>+504{cliente.personid.phone2}</td>
-                                                        <td>{new Date(cliente.personid.fec_nac).toLocaleDateString()}</td>
-                                                        <td>{cliente.personid.email} </td>
-                                                        <td>{cliente.personid.country}</td>
-                                                        <td>{cliente.personid.city}</td>
-                                                        <td>{cliente.personid.location}</td>
+                                                    <tr key={i}>  
+                                                        <td>{bodega.cost} Lps.</td>
+                                                        <td>{bodega.price1} Lps.</td>
+                                                        <td>{bodega.price2} Lps.</td>
+                                                        <td>{bodega.price3} Lps.</td>
+                                                        <td>{bodega.price4} Lps.</td>
                                                     </tr> 
                                                     )
                                                 })
@@ -222,7 +216,9 @@ export default function Empleados(){
                         </div>
                     </div>
                 </div>    
-            </div>     
+            </div>            
         </>
     )
+
+    
 }

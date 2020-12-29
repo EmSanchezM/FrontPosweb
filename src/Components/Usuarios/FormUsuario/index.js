@@ -1,14 +1,18 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 import usuarioContext from '../../../Context/usuarios/usuarioContext';
 import AlertaContext from '../../../Context/alertas/alertaContext';
+import TextoError from '../../Errors';
 
 export default function FormularioUsuario(){
     const history = useHistory()
 
     const alertaContext = useContext(AlertaContext);
-    const {alerta, mostrarAlerta} = alertaContext;
+    //const { alerta } = alertaContext;
 
     const [usuario, setUsuario] = useState({
         employeeid: '',
@@ -16,40 +20,39 @@ export default function FormularioUsuario(){
         password: '',
         passwordRepeat: '',
         role: ''
+    });
+
+    const [loop, ] = useState(0);
+
+    const validationSchema = Yup.object({
+        employeeid: Yup.string().required('Empleado requerido'),
+        username: Yup.string().required('El nombre de usuario es requerido'),
+        password: Yup.string()
+                    .min(6, 'Minimo 6 caracteres para la contraseña')
+                    .required('La contraseña es un campo obligatorio'),
+        passwordRepeat: Yup.string()
+                           .oneOf([Yup.ref('password'), null], 'Contraseñas no coinciden')
+                           .required('Repite tu contraseña para validar'),
+        role: Yup.string().required('El rol de usuario es requerido')
     })
 
     const UsuarioContext = useContext(usuarioContext);
-    const { errorusuario, empleados, obtenerEmpleados,  agregarUsuario, validarUsuario } = UsuarioContext;
-
-    const { employeeid, username, password, passwordRepeat, role } = usuario
+    const { errorusuario, empleados, obtenerEmpleados,  agregarUsuario } = UsuarioContext;
 
     useEffect(()=>{
         obtenerEmpleados();
-    },[obtenerEmpleados])
+    },[loop]) // eslint-disable-next-line
+
+    const handleSubmit = (usuario, submitProps) =>{
+        
+        console.log(usuario);
+        console.log('submit props', submitProps);
+
+        const { employeeid, username, password, passwordRepeat, role } = usuario
     
-    const onChange = e =>{
-        setUsuario({
-            ...usuario,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSubmit = e =>{
-        e.preventDefault();
-        //Validaciones
-        if(username.trim()==='' || password.trim()==='' || role.trim()==='')
-        {
-            validarUsuario();
-            return;
-        }
-
-        if(password.trim() !== passwordRepeat.trim()){
-            mostrarAlerta('Contraseñas no coinciden', 'alert-danger alert-dismissible fade show');
-            return;
-        }
-
-        //console.log('usuario form ',usuario);
         agregarUsuario({username, password, role, employeeid});
+        submitProps.setSubmitting(false);
+        submitProps.resetForm();
         //Redirigimos a la tabla de ver empleados
         history.push('/admin/usuarios');
         
@@ -74,8 +77,12 @@ export default function FormularioUsuario(){
                         <div className="errores">
                         {errorusuario ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
-                        
-                        <form onSubmit={handleSubmit}>
+                        <Formik
+                            initialValues={usuario}
+                            validationSchema={validationSchema}
+                            onSubmit={handleSubmit}
+                        >
+                        <Form>
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -84,7 +91,11 @@ export default function FormularioUsuario(){
                                             <hr/>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="empleado">Empleado</label>
-                                                <select name="employeeid" onChange={onChange} className="form-control">
+                                                <Field 
+                                                    component='select'
+                                                    name="employeeid"
+                                                    id='employeeid'
+                                                    className="form-control">
                                                     <option value="">Seleccione el empleado</option>
                                                     {empleados.map(empleado=>(
                                                         <option
@@ -94,50 +105,51 @@ export default function FormularioUsuario(){
                                                             {` ${empleado.personid.name} ${empleado.personid.lastname}`} 
                                                         </option>
                                                     ))}
-                                                </select>
+                                                </Field>
                                             </div>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="username">Nombre de Usuario</label>
-                                                <input 
+                                                <Field 
                                                     type="text" 
                                                     className="form-control"
                                                     name="username"
-                                                    value={username}
-                                                    onChange={onChange} 
+                                                    id="username" 
                                                     placeholder="Nombre de Usuario"
                                                 />
+                                                <ErrorMessage name='username' component={TextoError}/>
                                             </div>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="password">Contraseña</label>
-                                                <input 
+                                                <Field 
                                                     type="password" 
                                                     className="form-control"
                                                     name="password"
-                                                    value={password}
-                                                    onChange={onChange} 
-                                                    placeholder="Contraseña"/>
-                                                {alerta ? (<small className={`alerta ${alerta.tipoAlerta}`}> {alerta.msg} </small>): null}
+                                                    id="password" 
+                                                    placeholder="Contraseña"
+                                                />
+                                                <ErrorMessage name='password' component={TextoError}/>
                                             </div>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="passwordRepeat">Repita su Contraseña</label>
-                                                <input 
+                                                <Field 
                                                     type="password" 
                                                     className="form-control"
                                                     name="passwordRepeat"
-                                                    value={passwordRepeat}
-                                                    onChange={onChange} 
-                                                    placeholder="Repita la Contraseña"/>
+                                                    id="passwordRepeat" 
+                                                    placeholder="Repita la Contraseña"
+                                                />
+                                                <ErrorMessage name='passwordRepeat' component={TextoError}/>
                                             </div>
                                             <div className="form-group col-md-8">
                                                 <label htmlFor="role">Rol de Usuario</label>
-                                                <input 
+                                                <Field 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="role"
-                                                    value={role}
-                                                    onChange={onChange}
+                                                    id="role"
                                                     placeholder="Rol de Usuario"
                                                 />
+                                                <ErrorMessage name='role' component={TextoError}/>                 
                                             </div>
                                         </div>
                                     </div>
@@ -151,8 +163,8 @@ export default function FormularioUsuario(){
                                     </button>
                                 </div>
                             </div>
-                        </form>
-        
+                        </Form>
+                        </Formik>
                     </div>
                 </div>
             </div>

@@ -43,7 +43,7 @@ export default function FormularioProveedor(){
     })
 
     const ProveedorContext = useContext(proveedorContext);
-    const {proveedorseleccionado, errorproveedor, agregarProveedor, actualizarProveedor, validarProveedor} = ProveedorContext;
+    const {proveedorseleccionado, errorproveedor, obtenerProveedores, agregarProveedor, actualizarProveedor, validarProveedor} = ProveedorContext;
 
     useEffect(()=>{
         if(proveedorseleccionado !== null){
@@ -182,12 +182,14 @@ export default function FormularioProveedor(){
             //console.log('proveedor form ',proveedor);
             agregarProveedor(proveedor);
             mostrarAlerta('Proveedor agregado exitosamente!', 'alert-success');
+            obtenerProveedores();
             //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
             
         }else{
             actualizarProveedor(proveedor);
             mostrarAlerta('Proveedor actualizado exitosamente!', 'alert-success');
+            obtenerProveedores();
             //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
         }

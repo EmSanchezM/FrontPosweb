@@ -13,7 +13,7 @@ export default function Usuarios(){
     const {alerta, mostrarAlerta} = AlertaContext;
     let confirm;
 
-    const [loop, setLoop] = useState(0)
+    const [loop, ] = useState(0);
 
     const [consulta, setConsulta] = useState('');
     const [filterUsuarios, setFilterUsuarios] = useState(usuarios);
@@ -113,12 +113,12 @@ export default function Usuarios(){
                                             <tr><div className="alert alert-danger">No hay usuarios</div></tr>
                                             :
                                             (
-                                                filterUsuarios.map((usuario,i) => {
+                                                filterUsuarios.map((usuario) => {
                                                     return(
-                                                    <tr key={i+usuario._id} >  
-                                                        <td key={Math.random()}>{usuario.employeeid.codeEmployee}</td>
-                                                        <td key={Math.random()}>{usuario.username}</td>
-                                                        <td key={Math.random()}>{usuario.role}</td>
+                                                    <tr key={usuario._id} >  
+                                                        <td>{usuario.employeeid.codeEmployee}</td>
+                                                        <td>{usuario.username}</td>
+                                                        <td>{usuario.role}</td>
                                                         <td className="text-nowrap text-center">
                                                             
                                                             <button

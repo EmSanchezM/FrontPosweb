@@ -37,7 +37,7 @@ export default function FormularioCliente(){
     })
 
     const ClienteContext = useContext(clienteContext);
-    const {clienteseleccionado, errorcliente, agregarCliente, actualizarCliente, validarCliente, obtenerClientes} = ClienteContext;
+    const {clienteseleccionado, errorcliente, obtenerClientes, agregarCliente, actualizarCliente, validarCliente} = ClienteContext;
 
     useEffect(()=>{
         if(clienteseleccionado !== null){

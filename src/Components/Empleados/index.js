@@ -20,10 +20,11 @@ export default function Empleados(){
     //Bolean para alerta confirmar que se elimina
     let confirm;
 
-    const [loop, setLoop] = useState(0);
+    const [loop, ] = useState(0);
+
     useEffect(()=>{
         obtenerEmpleados();
-    }, [loop])
+    }, [loop]) // eslint-disable-next-line
 
     useMemo(()=>{
         const result = empleados.filter(empleado=>{
@@ -205,7 +206,7 @@ export default function Empleados(){
                                                     return(
                                                     <tr key={i} >  
                                                         <td>+504{empleado.personid.phone2}</td>
-                                                        <td>{empleado.personid.fec_nac}</td>
+                                                        <td>{new Date(empleado.personid.fec_nac).toLocaleDateString()}</td>
                                                         <td>{empleado.personid.email} </td>
                                                         <td>{empleado.personid.country}</td>
                                                         <td>{empleado.personid.city}</td>

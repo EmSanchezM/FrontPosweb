@@ -28,7 +28,7 @@ const ClienteState = props => {
     const obtenerClientes = async () => {
         try {
             const response = await Axios.get('customers');
-            console.log('obteniendo empleado ',response);
+            console.log('obteniendo cliente ',response);
             dispatch({
                 type: LISTAR_CLIENTES,
                 payload: response.data.customers
