@@ -172,7 +172,7 @@ export default function FormularioBodega(){
                         </div>
                         <div className="form-group col-md-8">
                             <label htmlFor="category">Empleado encargado</label>
-                            <select name="categoryId" onChange={onChange} className="form-control">
+                            <select name="employeeId" onChange={onChange} className="form-control">
                                 <option value="">Seleccione Empleado</option>
                                 {bodegaseleccionada ? (
                                     empleados?.map(empleado=>(

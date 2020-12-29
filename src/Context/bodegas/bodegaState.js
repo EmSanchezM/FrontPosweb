@@ -39,9 +39,10 @@ const BodegaState = props => {
     }
  
     const agregarBodega = async bodega => {
+        console.log(bodega);
         try {
             const response = await Axios.post('warehouses', bodega);
-            
+            console.log('response ', response);
             if(response.ok){
                 dispatch({
                     type: AGREGAR_BODEGA,
