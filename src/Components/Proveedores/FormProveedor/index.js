@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import proveedorContext from '../../../Context/proveedores/proveedorContext';
 import AlertaContext from '../../../Context/alertas/alertaContext';
 
+
 export default function FormularioProveedor(){
     const history = useHistory()
 
@@ -84,14 +85,14 @@ export default function FormularioProveedor(){
                     website, facebook, twitter, linkedin,skype} = proveedorseleccionado.personid;
             const {codeSupplier,companyName,companyLocation,companyPhone1,companyPhone2,companyRtn,companyWebsite,
                    companyLogo,title,workPosition,active} = proveedorseleccionado;
-            
+           
             proveedorActualizar.personid = _id
             proveedorActualizar.name = name
             proveedorActualizar.lastname = lastname
             proveedorActualizar.identidad = identidad
             proveedorActualizar.gender = gender
             proveedorActualizar.rtn = rtn
-            proveedorActualizar.fec_nac = fec_nac
+            proveedorActualizar.fec_nac = new Date(fec_nac).toLocaleDateString()
             proveedorActualizar.phone1 = phone1
             proveedorActualizar.phone2 = phone2
             proveedorActualizar.email = email
@@ -353,13 +354,13 @@ export default function FormularioProveedor(){
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <label htmlFor="">Fecha Nacimiento</label>
-                                                <input 
+                                                <input
                                                     type="date" 
                                                     className="form-control"
                                                     name="fec_nac"
                                                     value={fec_nac}
                                                     onChange={onChange} 
-                                                    placeholder="Fecha de Nacimiento"/>
+                                                />
                                             </div>
                                             
                                         </div>
