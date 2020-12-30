@@ -37,7 +37,7 @@ export default function FormularioCategoria(){
         children: [],
     };
     
-    categorias.map(categoria => {
+    categorias.forEach(categoria => {
         data.children.push({
             id: categoria._id,
             name: categoria.name
@@ -98,14 +98,14 @@ export default function FormularioCategoria(){
          if(categoriaseleccionada === null){
             agregarCategoria(categoria);
             mostrarAlerta('Categoria agregada exitosamente!', 'alert-success');
-            obtenerCategorias();
+              
             //Redirigimos a la tabla de ver categoria
             history.push('/admin/categorias');
             
         }else{
             actualizarCategoria(categoria);
             mostrarAlerta('Categoria actualizada exitosamente!', 'alert-success')
-            obtenerCategorias();
+            
             history.push('/admin/categorias');
         }
     }
@@ -180,16 +180,7 @@ export default function FormularioCategoria(){
                                 <div className="col-md-6">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="form-group col-md-12">
-                                                <label htmlFor="parentId">Categoría padre</label>
-                                                <input 
-                                                    type="text" 
-                                                    className="form-control"
-                                                    name="parentId"
-                                                    value={parentId}
-                                                    placeholder="Categoría padre"
-                                                />
-                                            </div>
+                                            <h2 className="card-title">Categorias</h2>                           
                                             <RecursiveTreeView data={data} parentId={parentId}/>
                                         </div>
                                     </div>
