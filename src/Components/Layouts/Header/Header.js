@@ -49,7 +49,6 @@ export default function Header(){
                                     <span className="pcoded-mtext">Usuarios</span>
                                 </Link>
                             </li>
-                            <li className="nav-item pcoded-menu-caption"><label htmlFor="">Gestion</label></li>
                             <li className="nav-item">
                                 <Link className="nav-link pcoded-hasmenu" to={'/admin/empleados'}>
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>
@@ -85,6 +84,13 @@ export default function Header(){
                                 <Link className="nav-link pcoded-hasmenu" to={'/admin/bodegas'}>
                                     <span className="pcoded-micon"><i className="ti-package"></i></span>
                                     <span className="pcoded-mtext">Bodegas</span>
+                                </Link>
+                            </li>
+                            <li className="nav-item pcoded-menu-caption"><label htmlFor="">Ordenes</label></li>
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/ordenescompras'}>
+                                    <span className="pcoded-micon"><i className="ti-shopping-cart-full"></i></span>
+                                    <span className="pcoded-mtext">Ordenes de Compra</span>
                                 </Link>
                             </li>                           
                         </ul>

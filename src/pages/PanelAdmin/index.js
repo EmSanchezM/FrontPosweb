@@ -27,6 +27,10 @@ import FormularioProducto from '../../Components/Productos/FormProducto';
 import Bodegas from '../../Components/Bodegas';
 import FormularioBodega from '../../Components/Bodegas/FormBodega';
 
+//CRUD ordenes de compra
+import OrdenesCompras from '../../Components/OrdenCompra';
+import FormularioOrdenCompra from '../../Components/OrdenCompra/FormOrdenCompra';
+
 export default function PanelAdmin() {
 
     return (
@@ -52,6 +56,8 @@ export default function PanelAdmin() {
                             <Route exact path={`/admin/productos/nuevo`} component={FormularioProducto}/>
                             <Route exact path={`/admin/bodegas`} component={Bodegas}/>
                             <Route exact path={`/admin/bodegas/nueva`} component={FormularioBodega}/>
+                            <Route exact path={`/admin/ordenescompras`} component={OrdenesCompras}/>
+                            <Route exact path={`/admin/ordenescompras/nueva`} component={FormularioOrdenCompra}/>
                         </div>
                     </div>
                 </div>
