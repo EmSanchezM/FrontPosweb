@@ -1,9 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
-/*
-import DetalleProducto from './DetalleProducto';
-import Bodega from './Bodega'
-*/
+
 import productoContext from '../../../Context/productos/productoContext';
 import categoriaContext from '../../../Context/categorias/categoriaContext';
 import proveedorContext from '../../../Context/proveedores/proveedorContext';
@@ -15,7 +12,7 @@ export default function FormularioProducto(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
-    const [loop, setLoop] = useState(0);
+    const [loop, ] = useState(0);
 
     const [producto, setProducto] = useState({
         step:1,
@@ -52,6 +49,7 @@ export default function FormularioProducto(){
     const ProveedorContext = useContext(proveedorContext);
     const { proveedores, obtenerProveedores } = ProveedorContext;
     
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerCategorias();
     },[loop])
@@ -60,26 +58,11 @@ export default function FormularioProducto(){
         obtenerProveedores();
     },[loop])
 
-    /*
-    nextStep = () => {
-        const { step } = producto;
-        this.setProducto({
-          step: step + 1
-        });
-      };
-    
-      // Go back to prev step
-    prevStep = () => {
-        const { step } = producto;
-        this.setProducto({
-          step: step - 1
-        });
-    };
-    */
-
+    /*eslint-enable*/
+   
     useEffect(()=>{
         if(productoseleccionado !== null){
-            console.log('producto seleccionado ',productoseleccionado);
+            //console.log('producto seleccionado ',productoseleccionado);
             setProducto(productoseleccionado);
         }else{
             setProducto({

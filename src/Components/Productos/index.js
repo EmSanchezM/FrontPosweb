@@ -7,7 +7,7 @@ import alertaContext from '../../Context/alertas/alertaContext';
 export default function Productos(){
     const history = useHistory();
 
-    const [loop, setLoop] = useState(0)
+    const [loop,] = useState(0)
 
     const ProductoContext = useContext(productoContext);
     const { productos, obtenerProductos, guardarProductoActual, eliminarProducto } = ProductoContext;
@@ -19,9 +19,11 @@ export default function Productos(){
     const [consulta, setConsulta] = useState('');
     const [filterProductos, setFilterProductos] = useState(productos);
 
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerProductos();
     }, [loop]);
+    /*eslint-enable*/
 
     useMemo(()=>{
         const result = productos.filter(producto=>{

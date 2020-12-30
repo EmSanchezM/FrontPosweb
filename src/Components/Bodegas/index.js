@@ -7,21 +7,22 @@ import alertaContext from '../../Context/alertas/alertaContext';
 export default function Bodegas(){
     const history = useHistory();
 
-    const [loop, setLoop] = useState(0)
-
     const BodegaContext = useContext(bodegaContext);
     const { bodegas, obtenerBodegas, guardarBodegaActual, eliminarBodega } = BodegaContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
+    
     let confirm;
-
+    const [loop,] = useState(0);
     const [consulta, setConsulta] = useState('');
     const [filterBodegas, setFilterBodegas] = useState(bodegas);
 
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerBodegas();
     }, [loop]);
+    /*eslint-enable*/
 
     useMemo(()=>{
         const result = bodegas.filter(bodega=>{

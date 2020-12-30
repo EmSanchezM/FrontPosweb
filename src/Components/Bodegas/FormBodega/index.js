@@ -11,7 +11,13 @@ export default function FormularioBodega(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
-    const [loop, setLoop] = useState(0);
+    const BodegaContext = useContext(bodegaContext);
+    const { bodegaseleccionada, errorbodega, actualizarBodega,  agregarBodega, validarBodega } = BodegaContext;
+
+    const EmpleadoContext = useContext(empleadoContext);
+    const { empleados, obtenerEmpleados } = EmpleadoContext;
+
+    const [loop,] = useState(0);
 
     const [bodega, setBodega] = useState({
         codeWarehouse:"",
@@ -24,21 +30,15 @@ export default function FormularioBodega(){
         active:true
     })
 
-    const BodegaContext = useContext(bodegaContext);
-    const { bodegaseleccionada, errorbodega, actualizarBodega,  agregarBodega, validarBodega } = BodegaContext;
-
-    
-    const EmpleadoContext = useContext(empleadoContext);
-    const { empleados, obtenerEmpleados } = EmpleadoContext;
-    
-  
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerEmpleados();
     },[loop])
+    /*eslint-enable*/
 
     useEffect(()=>{
         if(bodegaseleccionada !== null){
-            console.log('bodega seleccionado ',bodegaseleccionada);
+            //console.log('bodega seleccionado ',bodegaseleccionada);
             setBodega(bodegaseleccionada);
         }else{
             setBodega({

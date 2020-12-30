@@ -5,14 +5,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import usuarioContext from '../../../Context/usuarios/usuarioContext';
-import AlertaContext from '../../../Context/alertas/alertaContext';
 import TextoError from '../../Errors';
 
 export default function FormularioUsuario(){
     const history = useHistory()
-
-    const alertaContext = useContext(AlertaContext);
-    //const { alerta } = alertaContext;
 
     const [usuario, setUsuario] = useState({
         employeeid: '',
@@ -39,9 +35,11 @@ export default function FormularioUsuario(){
     const UsuarioContext = useContext(usuarioContext);
     const { errorusuario, empleados, obtenerEmpleados,  agregarUsuario } = UsuarioContext;
 
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerEmpleados();
-    },[loop]) // eslint-disable-next-line
+    },[loop]);
+    /*eslint-enable*/ 
 
     const handleSubmit = (usuario, submitProps) =>{
         

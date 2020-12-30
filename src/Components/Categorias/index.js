@@ -13,15 +13,17 @@ export default function Categorias(){
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
+    
     let confirm;
-
+    const [loop, ] = useState(0);
     const [consulta, setConsulta] = useState('');
     const [filterCategorias, setFilterCategorias] = useState(categorias);
     
-    const [loop, setLoop] = useState(0);
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerCategorias();
     }, [loop]);
+    /*eslint-enable*/
 
     useMemo(()=>{
         const result = categorias.filter(categoria=>{
@@ -119,9 +121,9 @@ export default function Categorias(){
                                             <tr><div className="alert alert-danger">No hay categorias</div></tr>
                                             :
                                             (
-                                                filterCategorias.map((categoria,i) => {
+                                                filterCategorias.map((categoria) => {
                                                     return(
-                                                    <tr key={i+categoria._id} >  
+                                                    <tr key={categoria._id} >  
                                                         <td>{categoria.codeCategory}</td>
                                                         <td>{categoria.name}</td>
                                                         <td>{categoria.active ? 'Activa': 'Desactiva'}</td>

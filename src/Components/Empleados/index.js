@@ -19,12 +19,13 @@ export default function Empleados(){
 
     //Bolean para alerta confirmar que se elimina
     let confirm;
-
     const [loop, ] = useState(0);
 
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerEmpleados();
-    }, [loop]) // eslint-disable-next-line
+    }, [loop]);
+    /*eslint-enable*/ 
 
     useMemo(()=>{
         const result = empleados.filter(empleado=>{

@@ -14,16 +14,17 @@ export default function Proveedores(){
     const alertContext = useContext(AlertContext);
     const {alerta, mostrarAlerta } = alertContext;
 
-    const [loop, setLoop] = useState(0);
     //Para buscar entre proveedores
     const [consulta, setConsulta] = useState('');
     const [filterProveedores, setFilterProveedores] = useState(proveedores);
     //Alerta para eliminar
     let confirm;
-
+    const [loop,] = useState(0);
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerProveedores();
     }, [loop])
+    /*eslint-enable*/
 
     const seleccionarProveedor = proveedor => {
         guardarProveedorActual(proveedor);

@@ -15,13 +15,15 @@ export default function Empleados(){
     const {alerta, mostrarAlerta} = AlertaContext;
 
     let confirm;
-
+    const [loop,] = useState(0);
     const [consulta, setConsulta] = useState('');
     const [filterClientes, setFilterClientes] = useState(clientes);
 
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerClientes();
-    }, []);
+    }, [loop]);
+    /*eslint-enable*/
 
     useMemo(()=>{
         const result = clientes.filter(cliente=>{

@@ -12,7 +12,7 @@ export default function FormularioCategoria(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
-    const [loop, setLoop] = useState(0);
+    const [loop,] = useState(0);
 
     const [categoria, setCategoria] = useState({
         parentId: '',
@@ -25,10 +25,11 @@ export default function FormularioCategoria(){
     const CategoriaContext = useContext(categoriaContext);
     const { categoriaseleccionada, errorcategoria, actualizarCategoria,  agregarCategoria, validarCategoria, categorias, obtenerCategorias } = CategoriaContext;
 
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerCategorias();
     },[loop])
-
+    /*eslint-enable*/
     
     const data = {
         id: 'root',
@@ -45,7 +46,7 @@ export default function FormularioCategoria(){
 
     useEffect(()=>{
         if(categoriaseleccionada !== null){
-            console.log('categoria seleccionada ',categoriaseleccionada)
+            //console.log('categoria seleccionada ',categoriaseleccionada)
             const categoriaActualizar = {
                 _id: categoriaseleccionada._id,
                 name: '',

@@ -18,9 +18,11 @@ export default function Usuarios(){
     const [consulta, setConsulta] = useState('');
     const [filterUsuarios, setFilterUsuarios] = useState(usuarios);
     
+    /*eslint-disable*/
     useEffect(()=>{
         obtenerUsuarios();
     }, [loop]);
+    /*eslint-enable*/
 
     useMemo(()=>{
         const result = usuarios.filter(usuario=>{

@@ -11,14 +11,12 @@ import AlertaContext from '../../Context/alertas/alertaContext';
 
 import logo from './logo.png'
 
-export default function Login(props){
+export default function Login(){
 
-
-    //console.log('props en login ',props)
     const history = useHistory()
 
     const alertaContext = useContext(AlertaContext);
-    const {alerta, mostrarAlerta} = alertaContext;
+    const { alerta } = alertaContext;
 
     const authContext = useContext(AuthContext);
     const {role, autenticado, iniciarSesion} = authContext;
@@ -45,19 +43,11 @@ export default function Login(props){
 
     const [loading, setLoading] = useState(false);
 
-    const {username, password} = usuario;
+    //const {username, password} = usuario;
 
-    const onChange = e =>{
-        setUsuario({
-            ...usuario,
-            [e.target.name] : e.target.value
-        })
-    }
-    
     const handleSubmit = (usuario, submitProps) =>{
-        
-        console.log(usuario);
-        console.log('submit props ', submitProps);
+        //console.log(usuario);
+        //console.log('submit props ', submitProps);
 
         setLoading(true)
 
@@ -65,6 +55,10 @@ export default function Login(props){
         submitProps.setSubmitting(false);
         submitProps.resetForm();
         setLoading(false);
+        setUsuario({
+            username: '',
+            password: ''
+        })
     }
 
     return (
