@@ -66,7 +66,7 @@ export default function OrdenesCompras(){
                                     <input 
                                         type="text"
                                         className="form-control"
-                                        placeholder="Buscar Bodega..."
+                                        placeholder="Buscar Orden de compra..."
                                         name="consulta"
                                         value={consulta}
                                         onChange={e=> setConsulta(e.target.value)}
@@ -100,11 +100,11 @@ export default function OrdenesCompras(){
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>COD. Orden Compra</th>
+                                            <th>Código</th>
                                             <th>Estado</th>
                                             <th>Tipo de pago</th>
-                                            <th>Tipo</th>
-                                            <th>Costo</th>
+                                            <th>Forma de envio</th>
+                                            <th>Costo de envio</th>
                                             <th>Total</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
@@ -121,9 +121,10 @@ export default function OrdenesCompras(){
                                                     <tr key={ordencompra._id}>  
                                                         <td>{ordencompra.codePurchaseOrder}</td>
                                                         <td>{ordencompra.status}</td>
+                                                        <td>{ordencompra.typePaid}</td>
                                                         <td>{ordencompra.typeShip}</td>
-                                                        <td>{ordencompra.costShip}</td>
-                                                        <td>{ordencompra.total}</td>
+                                                        <td>{ordencompra.costShip} Lps</td>
+                                                        <td>{ordencompra.total} Lps</td>
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 

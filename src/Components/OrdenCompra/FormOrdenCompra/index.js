@@ -140,7 +140,7 @@ export default function FormularioOrdenCompra(){
                                                 <ErrorMessage name='codePurchaseOrder' component={TextoError}/>
                                             </div>
                                             <div className="form-group col-md-12">
-                                                <label htmlFor="datePurchaseOrder">Fecha</label>
+                                                <label htmlFor="datePurchaseOrder">Fecha de Orden de compra</label>
                                                 <Field 
                                                     type="date" 
                                                     className="form-control"
@@ -241,7 +241,7 @@ export default function FormularioOrdenCompra(){
                                                     id="details"
                                                     name="details"
                                                     value={details}
-                                                    placeholder="Descripcion de la Bodega"
+                                                    placeholder="Detalles de la orden de compra"
                                                 />
                                                 <ErrorMessage name='details' component={TextoError}/>
                                             </div>
