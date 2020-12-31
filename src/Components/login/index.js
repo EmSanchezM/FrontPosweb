@@ -9,7 +9,7 @@ import TextoError from '../Errors';
 import AuthContext from '../../Context/autenticacion/authContext';
 import AlertaContext from '../../Context/alertas/alertaContext';
 
-import logo from './logo.png'
+import logo from './logo.png';
 
 export default function Login(){
 
@@ -65,13 +65,13 @@ export default function Login(){
         <>
         <div className="auth-wrapper">
             <div className="auth-content text-center">
-                {loading ?
-                    <Spinner/>
-                : null
+                {
+                    loading &&
+                        <Spinner/>
                 }
                 
                 <img src={logo} alt="LOGO" className="img-fluid mb-4"/>
-                {alerta ?
+                {alerta &&
                     (
                     <div className={`alert ${alerta.tipoAlerta}`}>
                         {alerta.msg ? 'Credenciales incorrectas': null}
@@ -80,7 +80,6 @@ export default function Login(){
                         </button>
                     </div>
                     )
-                    : null
                 }
                 <div className="card borderless">
                     <div className="row align-items-center">
