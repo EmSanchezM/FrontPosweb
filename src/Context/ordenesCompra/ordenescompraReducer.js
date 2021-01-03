@@ -1,10 +1,13 @@
 import {
     LISTAR_ORDENES_COMPRA,
+    PRODUCTOS_ORDEN_COMPRA,
     AGREGAR_ORDEN_COMPRA,
     VALIDAR_ORDEN_COMPRA,
     ACTUAL_ORDEN_COMPRA,
     ELIMINAR_ORDEN_COMPRA,
-    LIMPIAR_ORDEN_COMPRA_SELECCIONADA
+    LIMPIAR_ORDEN_COMPRA_SELECCIONADA,
+    AGREGAR_PRODUCTO_ORDEN_COMPRA,
+    VALIDAR_PRODUCTO_ORDEN_COMPRA
 } from '../../types';
 
 export default (state, action) => {
@@ -14,12 +17,28 @@ export default (state, action) => {
                 ...state,
                 ordenescompras: action.payload
             }
+        case PRODUCTOS_ORDEN_COMPRA:
+            return {
+                ...state,
+                productosordencompra: action.payload
+            }
         case AGREGAR_ORDEN_COMPRA:
             return {
                 ...state,
                 ordenescompras: [...state.ordenescompras, action.payload],
                 errorordenescompra: false,
             }
+        case AGREGAR_PRODUCTO_ORDEN_COMPRA:
+            return {
+                ...state,
+                productosordencompra: [...state.productosordencompra, action.payload],
+                errorproductoordencompra: false
+            }
+        case VALIDAR_PRODUCTO_ORDEN_COMPRA:
+            return {
+                ...state,
+                errorproductoordencompra:true
+            }    
         case VALIDAR_ORDEN_COMPRA:
             return {
                 ...state,

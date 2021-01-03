@@ -9,7 +9,9 @@ import {
     VALIDAR_ORDEN_COMPRA,
     ACTUAL_ORDEN_COMPRA,
     ELIMINAR_ORDEN_COMPRA,
-    LIMPIAR_ORDEN_COMPRA_SELECCIONADA
+    LIMPIAR_ORDEN_COMPRA_SELECCIONADA,
+    PRODUCTOS_ORDEN_COMPRA,
+    AGREGAR_PRODUCTO_ORDEN_COMPRA
 } from '../../types';
 
 import Axios from '../../config/axios';
@@ -18,7 +20,9 @@ const OrdenCompraState = props => {
     const initalState = {
         ordenescompras: [],
         errorordencompra: false,
-        ordencompraseleccionada: null
+        ordencompraseleccionada: null,
+        productosordencompra: [],
+        errorproductoordencompra: false
     }
 
     const [state, dispatch] = useReducer(ordenescompraReducer, initalState);
@@ -34,6 +38,18 @@ const OrdenCompraState = props => {
             
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const productosOrdenCompra = async (ordencompra) => {
+        try {
+            const response = await Axios.get(`purchase_order_details/${ordencompra._id}`);
+            dispatch({
+                type: PRODUCTOS_ORDEN_COMPRA,
+                payload: response.data.productsDetails
+            })
+        } catch (error) {
+            console.log(error);    
         }
     }
  
@@ -54,6 +70,22 @@ const OrdenCompraState = props => {
             dispatch({
                 type: VALIDAR_ORDEN_COMPRA
             })
+        }
+    }
+
+    const agregarProductoOrdenCompra = async productoOrdenCompra => {
+        console.log(productoOrdenCompra);
+        try {
+            const response = await Axios.post('purchase_order_details', productoOrdenCompra);
+            console.log('response ', response);
+            if(response.ok){
+                dispatch({
+                    type: AGREGAR_PRODUCTO_ORDEN_COMPRA,
+                    payload: productoOrdenCompra
+                })
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -95,8 +127,12 @@ const OrdenCompraState = props => {
                 ordenescompras: state.ordenescompras,
                 errorordencompra: state.errorordencompra,
                 ordencompraseleccionada: state.ordencompraseleccionada,
+                productosordencompra: state.productosordencompra,
+                errorproductoordencompra: state.errorproductoordencompra,
                 obtenerOrdenesCompras,
+                productosOrdenCompra,
                 agregarOrdenCompra,
+                agregarProductoOrdenCompra,
                 eliminarOrdenCompra,
                 validarOrdenCompra,
                 guardarOrdenCompraActual,

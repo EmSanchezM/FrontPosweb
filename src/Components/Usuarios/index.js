@@ -118,7 +118,7 @@ export default function Usuarios(){
                                                 filterUsuarios.map((usuario) => {
                                                     return(
                                                     <tr key={usuario._id} >  
-                                                        <td>{usuario.employeeid.codeEmployee}</td>
+                                                        <td>{usuario.employeeid?.codeEmployee}</td>
                                                         <td>{usuario.username}</td>
                                                         <td>{usuario.role}</td>
                                                         <td className="text-nowrap text-center">

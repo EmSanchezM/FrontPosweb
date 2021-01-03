@@ -18,7 +18,7 @@ export default function FormularioUsuario(){
         role: ''
     });
 
-    const [loop, ] = useState(0);
+    const [ loop ] = useState(0);
 
     const validationSchema = Yup.object({
         employeeid: Yup.string().required('Empleado requerido'),
@@ -43,10 +43,10 @@ export default function FormularioUsuario(){
 
     const handleSubmit = (usuario, submitProps) =>{
         
-        console.log(usuario);
-        console.log('submit props', submitProps);
+        //console.log(usuario);
+        //console.log('submit props', submitProps);
 
-        const { employeeid, username, password, passwordRepeat, role } = usuario
+        const { employeeid, username, password, role } = usuario
     
         agregarUsuario({username, password, role, employeeid});
         submitProps.setSubmitting(false);
@@ -59,7 +59,7 @@ export default function FormularioUsuario(){
             employeeid: '',
             username: '',
             password: '',
-            passwordRepeat,
+            passwordRepeat:'',
             role: ''
         })
     }
@@ -73,7 +73,7 @@ export default function FormularioUsuario(){
                         <h4 className="card-title">Agregar Usuario</h4>
                         <hr/>
                         <div className="errores">
-                        {errorusuario ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
+                        {errorusuario && ( <small className="text-danger">Todos los campos son obligatorio</small>)}
                         </div>
                         <Formik
                             initialValues={usuario}

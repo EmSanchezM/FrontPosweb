@@ -23,7 +23,9 @@ export default function FormularioOrdenCompra(){
         dateShip: Yup.date().required('La fecha del envio es requerida'),
         costShip: Yup.number().min(1,'El costo de envio no puede ser menor a cero').required('El costo del envio es requerido'),
         details: Yup.string(),
-        active: Yup.boolean()
+        active: Yup.boolean(),
+        supplierId: Yup.string(),
+        employeeId: Yup.string()
     })
 
     const alertaContext = useContext(AlertaContext);
@@ -72,9 +74,7 @@ export default function FormularioOrdenCompra(){
         obtenerBodegas();
     },[loop])
     /*eslint-enable*/
-
-    const { codePurchaseOrder, datePurchaseOrder, total,status,typePaid, typeShip, dateShip, costShip, details, active } = ordenCompra
-
+    
     const handleSubmit = (ordenCompra, submitProps) =>{
         agregarOrdenCompra(ordenCompra);
         mostrarAlerta('Orden de compra agregada exitosamente!', 'alert-success');
@@ -134,7 +134,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="codePurchaseOrder"
                                                     name="codePurchaseOrder"
-                                                    value={codePurchaseOrder}
                                                     placeholder="Código de orden de compra"
                                                 />
                                                 <ErrorMessage name='codePurchaseOrder' component={TextoError}/>
@@ -146,7 +145,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id='datePurchaseOrder'
                                                     name="datePurchaseOrder"
-                                                    value={datePurchaseOrder} 
                                                     placeholder="Fecha de Orden de compra"
                                                 />
                                                 <ErrorMessage name='datePurchaseOrder' component={TextoError}/>
@@ -178,8 +176,6 @@ export default function FormularioOrdenCompra(){
                                                         type="checkbox" 
                                                         id="switch-p-2" 
                                                         name="active" 
-                                                        value={active}
-
                                                     />  
                                                     <label htmlFor="switch-p-2" className="cr"></label>
                                                 </div>
@@ -240,7 +236,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="details"
                                                     name="details"
-                                                    value={details}
                                                     placeholder="Detalles de la orden de compra"
                                                 />
                                                 <ErrorMessage name='details' component={TextoError}/>
@@ -258,7 +253,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="typeShip"
                                                     name="typeShip"
-                                                    value={typeShip}
                                                     placeholder="Tipo de Envio"
                                                 />
                                                 <ErrorMessage name='typeShip' component={TextoError}/>
@@ -270,7 +264,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="dateShip"
                                                     name="dateShip"
-                                                    value={dateShip}
                                                     placeholder="Fecha de Envio"
                                                 />
                                                 <ErrorMessage name='dateShip' component={TextoError}/>
@@ -282,7 +275,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="costShip"
                                                     name="costShip"
-                                                    value={costShip}
                                                     placeholder="Costo de Envio"
                                                 />
                                                 <ErrorMessage name='costShip' component={TextoError}/>
@@ -300,7 +292,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="typePaid"
                                                     name="typePaid"
-                                                    value={typePaid}
                                                     placeholder="Tipo de pago"
                                                 />
                                                 <ErrorMessage name='typePaid' component={TextoError}/>
@@ -312,7 +303,6 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="status"
                                                     name="status"
-                                                    value={status}
                                                     placeholder="Estado de la orden de compra"
                                                 />
                                                 <ErrorMessage name='status' component={TextoError}/>
@@ -324,12 +314,10 @@ export default function FormularioOrdenCompra(){
                                                     className="form-control"
                                                     id="total"
                                                     name="total"
-                                                    value={total}
                                                     placeholder="Total"
                                                 />
                                                 <ErrorMessage name='total' component={TextoError}/>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -348,6 +336,6 @@ export default function FormularioOrdenCompra(){
             </div>
         </div>
     </div>
-    </>
+        </>
     )
 }

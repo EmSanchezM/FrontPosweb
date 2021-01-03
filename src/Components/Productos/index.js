@@ -7,7 +7,7 @@ import alertaContext from '../../Context/alertas/alertaContext';
 export default function Productos(){
     const history = useHistory();
 
-    const [loop,] = useState(0)
+    const [ loop ] = useState(0);
 
     const ProductoContext = useContext(productoContext);
     const { productos, obtenerProductos, guardarProductoActual, eliminarProducto } = ProductoContext;

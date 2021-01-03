@@ -12,10 +12,9 @@ export default function FormularioProducto(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
-    const [loop, ] = useState(0);
+    const [ loop ] = useState(0);
 
     const [producto, setProducto] = useState({
-        step:1,
         codeProduct:'',
         name:'',
         description:'',

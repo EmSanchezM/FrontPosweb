@@ -1,13 +1,15 @@
 import React,  { useContext, useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import ordenesCompraContext from '../../Context/ordenesCompra/ordenescompraContext';
 import alertaContext from '../../Context/alertas/alertaContext';
 
 export default function OrdenesCompras(){
     
+    const history = useHistory();
+
     const OrdenesCompraContext = useContext(ordenesCompraContext);
-    const { ordenescompras, obtenerOrdenesCompras, eliminarOrdenCompra } = OrdenesCompraContext;
+    const { ordenescompras, obtenerOrdenesCompras, guardarOrdenCompraActual, eliminarOrdenCompra } = OrdenesCompraContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
@@ -30,7 +32,12 @@ export default function OrdenesCompras(){
                     .includes(consulta.toLowerCase())
         })
         setFilterOrdenCompra(result);
-    },[consulta, ordenescompras])
+    },[consulta, ordenescompras]);
+
+    const seleccionarOrdenCompra = ordencompra => {
+        guardarOrdenCompraActual(ordencompra);
+        history.push('ordenescompras/productos');
+    }
 
     const onClickEliminar = ordencompra => {
         confirm = window.confirm('¿Estas seguro de eliminarlo?');
@@ -120,12 +127,18 @@ export default function OrdenesCompras(){
                                                     return(
                                                     <tr key={ordencompra._id}>  
                                                         <td>{ordencompra.codePurchaseOrder}</td>
-                                                        <td>{ordencompra.status}</td>
+                                                        <td className="">{ordencompra.status}</td>
                                                         <td>{ordencompra.typePaid}</td>
                                                         <td>{ordencompra.typeShip}</td>
                                                         <td>{ordencompra.costShip} Lps</td>
                                                         <td>{ordencompra.total} Lps</td>
                                                         <td className="text-nowrap text-center">
+                                                            <button
+                                                                data-toggle="tooltip" 
+                                                                className="btn btn-sm btn-info"
+                                                                data-original-title="Productos"
+                                                                onClick={()=>seleccionarOrdenCompra(ordencompra)}
+                                                            ><i className="ti-eye"></i></button>
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"
@@ -146,6 +159,5 @@ export default function OrdenesCompras(){
                 </div>
             </div>
         </>
-    )
-   
+    )  
 }
