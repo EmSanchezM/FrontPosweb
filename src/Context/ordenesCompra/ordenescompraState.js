@@ -41,7 +41,7 @@ const OrdenCompraState = props => {
         }
     }
 
-    const productosOrdenCompra = async (ordencompra) => {
+    const getProductosOrdenCompra = async (ordencompra) => {
         try {
             const response = await Axios.get(`purchase_order_details/${ordencompra._id}`);
             dispatch({
@@ -73,10 +73,21 @@ const OrdenCompraState = props => {
         }
     }
 
-    const agregarProductoOrdenCompra = async productoOrdenCompra => {
+    const agregarProductoOrdenCompra = async (productoOrdenCompra, idOrdenCompra) => {
         console.log(productoOrdenCompra);
+        const { productId, cuantity, cost, tax, discount } = productoOrdenCompra;
+
+        let saveProductoOrden = {
+            purchaseOrderId: idOrdenCompra,
+            productId,
+            cuantity,
+            cost,
+            tax,
+            discount
+        }
+
         try {
-            const response = await Axios.post('purchase_order_details', productoOrdenCompra);
+            const response = await Axios.post('purchase_order_details', saveProductoOrden);
             console.log('response ', response);
             if(response.ok){
                 dispatch({
@@ -130,7 +141,7 @@ const OrdenCompraState = props => {
                 productosordencompra: state.productosordencompra,
                 errorproductoordencompra: state.errorproductoordencompra,
                 obtenerOrdenesCompras,
-                productosOrdenCompra,
+                getProductosOrdenCompra,
                 agregarOrdenCompra,
                 agregarProductoOrdenCompra,
                 eliminarOrdenCompra,

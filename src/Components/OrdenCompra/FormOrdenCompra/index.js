@@ -76,6 +76,7 @@ export default function FormularioOrdenCompra(){
     /*eslint-enable*/
     
     const handleSubmit = (ordenCompra, submitProps) =>{
+        console.log(ordenCompra);
         agregarOrdenCompra(ordenCompra);
         mostrarAlerta('Orden de compra agregada exitosamente!', 'alert-success');
         submitProps.setSubmitting(false);

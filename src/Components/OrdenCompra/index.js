@@ -39,6 +39,11 @@ export default function OrdenesCompras(){
         history.push('ordenescompras/productos');
     }
 
+    const verProductosOrden = ordencompra => {
+        guardarOrdenCompraActual(ordencompra);
+        history.push('ordenescompras/detalle');
+    }
+
     const onClickEliminar = ordencompra => {
         confirm = window.confirm('¿Estas seguro de eliminarlo?');
         
@@ -81,7 +86,6 @@ export default function OrdenesCompras(){
                                 </div>
                             )
                             }
-
                         </div>
                     </div>
                 </div>
@@ -97,7 +101,7 @@ export default function OrdenesCompras(){
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
                                         <Link className="btn btn-sm btn-primary" to='/admin/ordenescompras/nueva'>
-                                            <span className="pcoded-micon"><i className="ti-user"></i></span>
+                                            <span className="pcoded-micon"><i className="ti-plus"></i></span>
                                             <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
                                     </div>
@@ -135,10 +139,16 @@ export default function OrdenesCompras(){
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 
+                                                                className="btn btn-sm btn-success"
+                                                                data-original-title="Ver Productos"
+                                                                onClick={()=>verProductosOrden(ordencompra)}
+                                                            ><i className="ti-eye"></i></button>
+                                                            <button
+                                                                data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-info"
                                                                 data-original-title="Productos"
                                                                 onClick={()=>seleccionarOrdenCompra(ordencompra)}
-                                                            ><i className="ti-eye"></i></button>
+                                                            ><i className="ti-plus"></i></button>
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"
