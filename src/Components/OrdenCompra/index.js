@@ -36,12 +36,12 @@ export default function OrdenesCompras(){
 
     const seleccionarOrdenCompra = ordencompra => {
         guardarOrdenCompraActual(ordencompra);
-        history.push('ordenescompras/productos');
+        history.push('/admin/ordenescompras/productos');
     }
 
     const verProductosOrden = ordencompra => {
         guardarOrdenCompraActual(ordencompra);
-        history.push('ordenescompras/detalle');
+        history.push('/admin/ordenescompras/detalle');
     }
 
     const onClickEliminar = ordencompra => {

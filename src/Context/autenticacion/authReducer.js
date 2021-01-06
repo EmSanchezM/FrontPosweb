@@ -16,6 +16,7 @@ export default (state, action) =>{
         case LOGIN_ERROR:
         case CERRAR_SESION:
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
             return{
                 ...state,
                 token: null,

@@ -18,6 +18,7 @@ export default (state, action) => {
                 ordenescompras: action.payload
             }
         case PRODUCTOS_ORDEN_COMPRA:
+            
             return {
                 ...state,
                 productosordencompra: action.payload

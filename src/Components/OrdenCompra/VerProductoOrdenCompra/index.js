@@ -1,38 +1,50 @@
 import React,  { useContext, useEffect, useState, useMemo } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+//import { Link, useHistory } from 'react-router-dom';
 
 import ordenesCompraContext from '../../../Context/ordenesCompra/ordenescompraContext';
-import alertaContext from '../../../Context/alertas/alertaContext';
+//import alertaContext from '../../../Context/alertas/alertaContext';
 
 export default function ProductosOrdenCompra() {
 
-    const history = useHistory();
+    //const history = useHistory();
 
     const OrdenesCompraContext = useContext(ordenesCompraContext);
-    const { ordenescompras, ordencompraseleccionada, getProductosOrdenCompra, productosordencompra } = OrdenesCompraContext;
+    const { ordencompraseleccionada, getProductosOrdenCompra, productosordencompra } = OrdenesCompraContext;
 
-    const AlertaContext = useContext(alertaContext);
-    const { alerta, mostrarAlerta } = AlertaContext;
+    //const AlertaContext = useContext(alertaContext);
+    //const { alerta, mostrarAlerta } = AlertaContext;
 
+    const [ productosOrdenCompra, setProductosOrdenCompra ] = useState([]);
     const [ consulta, setConsulta ] = useState('');
-    const [filterProductosOrdenCompra, setFilterProductosOrdenCompra] = useState(productosordencompra);
+    const [filterProductosOrdenCompra, setFilterProductosOrdenCompra] = useState(productosOrdenCompra);
 
+    /*eslint-disable*/
     useEffect(() => {
-        console.log(ordencompraseleccionada);
-        if(ordencompraseleccionada != null){
+        if(ordencompraseleccionada !== null){
             getProductosOrdenCompra(ordencompraseleccionada);
         }
         
+    }, []);
+
+    useEffect(() => {
+        //console.log(ordencompraseleccionada);
+        if(ordencompraseleccionada != null){
+            setProductosOrdenCompra(productosordencompra);
+        }else{
+            setProductosOrdenCompra([]);
+        }
+        
     }, [ordencompraseleccionada]);
+    /*eslint-enable*/
 
     useMemo(()=>{
-        const result = ordenescompras.filter(ordencompra=>{
-            return `${ordencompra.codePurchaseOrder}`
+        const result = productosOrdenCompra?.filter(producto=>{
+            return `${producto.cost}`
                     .toLowerCase()
                     .includes(consulta.toLowerCase())
         })
         setFilterProductosOrdenCompra(result);
-    },[consulta, ordenescompras]);
+    },[consulta, productosOrdenCompra]);
 
     return (
         <>
@@ -66,11 +78,12 @@ export default function ProductosOrdenCompra() {
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Estado</th>
-                                            <th>Tipo de pago</th>
-                                            <th>Forma de envio</th>
-                                            <th>Costo de envio</th>
-                                            <th>Total</th>
+                                            <th>Cantidad</th>
+                                            <th>Costo</th>
+                                            <th>Tax</th>
+                                            <th>Descuento</th>
+                                            <th>Orden de Compra</th>
+                                            <th>Producto</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
                                     </thead>
@@ -78,14 +91,14 @@ export default function ProductosOrdenCompra() {
                                         {
                                             filterProductosOrdenCompra.length === 0
                                             ?
-                                            <tr><div className="alert alert-danger">No hay ordenes de compras</div></tr>
+                                            <tr><div className="alert alert-danger">No hay productos en esta orden de compra</div></tr>
                                             :
                                             (
                                                 filterProductosOrdenCompra.map(producto => {
                                                     return(
                                                     <tr key={producto._id}>  
                                                         <td>{producto.cuantity}</td>
-                                                        <td className="">{producto.cost}</td>
+                                                        <td>{producto.cost}</td>
                                                         <td>{producto.tax}</td>
                                                         <td>{producto.discount}</td>
                                                         <td>{producto.purchaseOrderId}</td>

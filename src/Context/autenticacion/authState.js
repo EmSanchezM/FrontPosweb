@@ -21,12 +21,12 @@ const AuthState = props =>{
     const iniciarSesion = async data =>{
         try {
             const response = await Axios.post('auth/login', data);
-            console.log(response);
+            console.log('auth response ',response);
 
-            if(response.status===400){
+            if(!response.ok){
                 console.log(response.data)
                 const alerta = {
-                    msg: response.data.errors,
+                    msg: 'Credenciales incorrectas',
                     tipoAlerta: 'alert-danger alert-dismissible fade show'
                 }
                 
@@ -37,6 +37,7 @@ const AuthState = props =>{
             }
 
             if(response.data.userDB){
+                localStorage.setItem('user', JSON.stringify(response.data.userDB));
                 dispatch({
                     type: LOGIN_EXITOSO,
                     payload: response.data

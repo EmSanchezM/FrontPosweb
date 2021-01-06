@@ -20,7 +20,7 @@ export default function Navbar(){
     }
 
     const toggleFullScreen = ()=>{
-        return
+        return;
     }
 
     return (
@@ -44,7 +44,7 @@ export default function Navbar(){
                             <div className="dropdown-menu dropdown-menu-right profile-notification">
                                 <div className="pro-head">
                                     {
-                                    autenticado ?
+                                    autenticado &&
                                     (
                                         <>
                                         <img src={userImg} alt="user-default" className="rounded-circle"/>
@@ -52,8 +52,7 @@ export default function Navbar(){
                                         <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
                                         </>
                                     )
-                                    : 
-                                    null
+                                    
                                     }
                                     </div>
                                 <ul className="pro-body">
