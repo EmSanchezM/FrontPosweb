@@ -8,6 +8,35 @@ import Navbar from '../Navbar/Navbar';
         customInitFunctions();
     }, [customInitFunctions])*/
     
+/*
+ <li className="nav-item pcoded-hasmenu">
+    <Link className="nav-link" to="#!" onClick={preventDefault}>
+        <span className="pcoded-micon"><i className="ti-package"></i></span>
+        <span className="pcoded-mtext">Gestion de Inventarios</span>
+    </Link>
+    <ul className="pcoded-submenu">
+        <li>
+            <Link className="nav-link pcoded-hasmenu" to={'/admin/categorias'}>
+                <span className="pcoded-micon"><i className="ti-clipboard"></i></span>
+                <span className="pcoded-mtext">Categorias</span>
+            </Link>
+        </li>
+        <li>
+            <Link className="nav-link pcoded-hasmenu" to={'/admin/productos'}>
+                <span className="pcoded-micon"><i className="ti-shopping-cart"></i></span>
+                <span className="pcoded-mtext">Productos</span>
+            </Link>
+        </li>
+        <li>
+            <Link className="nav-link pcoded-hasmenu" to={'/admin/bodegas'}>
+                <span className="pcoded-micon"><i className="ti-package"></i></span>
+                <span className="pcoded-mtext">Bodegas</span>
+            </Link>
+        </li>
+    </ul>
+</li>
+
+*/
 export default function Header(){
     
     let user = JSON.parse(localStorage.getItem('user'));
@@ -76,32 +105,24 @@ export default function Header(){
                                     </li>
                                 </ul>
                             </li>
-                            
-                            <li className="nav-item pcoded-hasmenu">
-                                <Link className="nav-link" to="#!" onClick={preventDefault}>
-                                    <span className="pcoded-micon"><i className="ti-package"></i></span>
-                                    <span className="pcoded-mtext">Gestion de Inventarios</span>
+                            <li className="nav-item pcoded-menu-caption"><label htmlFor="">Inventarios</label></li>
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/categorias'}>
+                                    <span className="pcoded-micon"><i className="ti-clipboard"></i></span>
+                                    <span className="pcoded-mtext">Categorias</span>
                                 </Link>
-                                <ul className="pcoded-submenu">
-                                    <li>
-                                        <Link className="nav-link pcoded-hasmenu" to={'/admin/categorias'}>
-                                            <span className="pcoded-micon"><i className="ti-clipboard"></i></span>
-                                            <span className="pcoded-mtext">Categorias</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link className="nav-link pcoded-hasmenu" to={'/admin/productos'}>
-                                            <span className="pcoded-micon"><i className="ti-shopping-cart"></i></span>
-                                            <span className="pcoded-mtext">Productos</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link className="nav-link pcoded-hasmenu" to={'/admin/bodegas'}>
-                                            <span className="pcoded-micon"><i className="ti-package"></i></span>
-                                            <span className="pcoded-mtext">Bodegas</span>
-                                        </Link>
-                                    </li>
-                                </ul>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/productos'}>
+                                    <span className="pcoded-micon"><i className="ti-shopping-cart"></i></span>
+                                    <span className="pcoded-mtext">Productos</span>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/bodegas'}>
+                                    <span className="pcoded-micon"><i className="ti-package"></i></span>
+                                    <span className="pcoded-mtext">Bodegas</span>
+                                </Link>
                             </li>
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Ordenes</label></li>
                             <li className="nav-item">
