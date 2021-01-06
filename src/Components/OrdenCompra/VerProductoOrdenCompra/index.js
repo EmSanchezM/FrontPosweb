@@ -97,12 +97,12 @@ export default function ProductosOrdenCompra() {
                                                 filterProductosOrdenCompra.map(producto => {
                                                     return(
                                                     <tr key={producto._id}>  
+                                                        <td>{producto.productId}</td>
                                                         <td>{producto.cuantity}</td>
                                                         <td>{producto.cost}</td>
                                                         <td>{producto.tax}</td>
                                                         <td>{producto.discount}</td>
                                                         <td>{producto.purchaseOrderId}</td>
-                                                        <td>{producto.productId}</td>
                                                         <td className="text-nowrap text-center">
                                                             
                                                         </td>
