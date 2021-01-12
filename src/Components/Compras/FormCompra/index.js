@@ -215,6 +215,16 @@ export default function FormularioCompra(){
                                 placeholder="Tipo de pago"/>
                         </div>
                         <div className="form-group col-md-8">
+                            <label htmlFor="codeInvoice">Código de Factura</label>
+                            <input 
+                                type="number" 
+                                className="form-control"
+                                name="codeInvoice"
+                                value={codeInvoice}
+                                onChange={onChange} 
+                                placeholder="Código de Factura"/>
+                        </div>
+                        <div className="form-group col-md-8">
                             <label htmlFor="Balance">Balance</label>
                             <input 
                                 type="text" 
