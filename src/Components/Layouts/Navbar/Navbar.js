@@ -7,9 +7,10 @@ import userImg from '../Header/user_default.png';
 import AuthContext from '../../../Context/autenticacion/authContext';
 
 export default function Navbar(){
-    
+
+    let user = JSON.parse(localStorage.getItem('user'));
     const authContext = useContext(AuthContext);
-    const {autenticado, usuarioAuth, cerrarSesion} = authContext;
+    const { cerrarSesion } = authContext;
 
     const history = useHistory();
 
@@ -44,11 +45,11 @@ export default function Navbar(){
                             <div className="dropdown-menu dropdown-menu-right profile-notification">
                                 <div className="pro-head">
                                     {
-                                    autenticado &&
+                                    user &&
                                     (
                                         <>
                                         <img src={userImg} alt="user-default" className="rounded-circle"/>
-                                        <span>{usuarioAuth?.username}</span>
+                                        <span>{user?.username}</span>
                                         <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
                                         </>
                                     )
