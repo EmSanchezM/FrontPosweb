@@ -14,7 +14,7 @@ export default function Bodegas(){
     const {alerta, mostrarAlerta} = AlertaContext;
     
     let confirm;
-    const [loop,] = useState(0);
+    const [ loop ] = useState(0);
     const [consulta, setConsulta] = useState('');
     const [filterBodegas, setFilterBodegas] = useState(bodegas);
 

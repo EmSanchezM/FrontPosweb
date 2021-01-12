@@ -4,6 +4,14 @@ import { useHistory } from 'react-router-dom';
 import clienteContext from '../../../Context/clientes/clienteContext';
 import AlertaContext from '../../../Context/alertas/alertaContext';
 
+function changeBooleanPayIVA(payiva){
+    switch(payiva){
+        case "true": return true;
+        case "false": return false;
+        default: return false;
+    }
+}
+
 export default function FormularioCliente(){
     const history = useHistory()
 
@@ -41,7 +49,7 @@ export default function FormularioCliente(){
 
     useEffect(()=>{
         if(clienteseleccionado !== null){
-            console.log('cliente seleccionado ',clienteseleccionado)
+            //console.log('cliente seleccionado ',clienteseleccionado)
             const clienteActualizar = {
                 _id: clienteseleccionado._id,
                 personid: '',
@@ -138,14 +146,6 @@ export default function FormularioCliente(){
         })
     }
 
-    function changeBooleanPayIVA(payiva){
-        switch(payiva){
-            case "true": return true;
-            case "false": return false;
-            default: return false;
-        }
-    }
-
     const handleSubmit = e =>{
         e.preventDefault();
         //Validaciones
@@ -164,24 +164,24 @@ export default function FormularioCliente(){
 
         payIVA = changeBooleanPayIVA(payIVA)
 
-        console.log(active, payIVA)
+        //console.log(active, payIVA)
 
         //Comprobamos si es agregar o editar
         if(clienteseleccionado === null){
             agregarCliente(cliente);
             mostrarAlerta('Cliente agregado exitosamente!', 'alert-success');
-            obtenerClientes();
+            
             //Redirigimos a la tabla de ver empleados
             history.push('/admin/clientes');
             
         }else{
             actualizarCliente(cliente);
             mostrarAlerta('Cliente actualizado exitosamente!', 'alert-success');
-            obtenerClientes();
+            
             history.push('/admin/clientes');
         }
 
-        //Reiniciamos el formulario
+        //Reiniciamos el state
         setCliente({
             personid: -1,
             name: '',

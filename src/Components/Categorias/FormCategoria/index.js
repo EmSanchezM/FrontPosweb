@@ -12,7 +12,7 @@ export default function FormularioCategoria(){
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
-    const [loop,] = useState(0);
+    const [ loop ] = useState(0);
 
     const [categoria, setCategoria] = useState({
         parentId: '',

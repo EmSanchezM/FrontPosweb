@@ -54,7 +54,7 @@ export default function FormularioUsuario(){
         //Redirigimos a la tabla de ver empleados
         history.push('/admin/usuarios');
         
-        //Reiniciamos el formulario
+        //Reiniciamos el state
         setUsuario({
             employeeid: '',
             username: '',

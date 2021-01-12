@@ -126,7 +126,6 @@ export default function FormularioEmpleado(){
            location, website, facebook, twitter, linkedin, skype, codeEmployee, workLocation, 
            workPosition, active} = empleado
 
-    
     const onChange = e =>{
         setEmpleado({
             ...empleado,
@@ -145,8 +144,6 @@ export default function FormularioEmpleado(){
             return;
         }
 
-        alert(active)
-
         //Comprobamos si es agregar o editar
         if(empleadoseleccionado === null){
             //console.log('empleado form ',empleado);
@@ -161,7 +158,7 @@ export default function FormularioEmpleado(){
             history.push('/admin/empleados');
         }
         
-        //Reiniciamos el formulario
+        //Reiniciamos el state
         setEmpleado({
             personid: -1,
             name: '',

@@ -183,14 +183,12 @@ export default function FormularioProveedor(){
             //console.log('proveedor form ',proveedor);
             agregarProveedor(proveedor);
             mostrarAlerta('Proveedor agregado exitosamente!', 'alert-success');
-            obtenerProveedores();
             //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
             
         }else{
             actualizarProveedor(proveedor);
             mostrarAlerta('Proveedor actualizado exitosamente!', 'alert-success');
-            obtenerProveedores();
             //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
         }
