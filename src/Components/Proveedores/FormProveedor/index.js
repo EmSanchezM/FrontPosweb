@@ -44,7 +44,7 @@ export default function FormularioProveedor(){
     })
 
     const ProveedorContext = useContext(proveedorContext);
-    const {proveedorseleccionado, errorproveedor, obtenerProveedores, agregarProveedor, actualizarProveedor, validarProveedor} = ProveedorContext;
+    const {proveedorseleccionado, errorproveedor, agregarProveedor, actualizarProveedor, validarProveedor} = ProveedorContext;
 
     useEffect(()=>{
         if(proveedorseleccionado !== null){

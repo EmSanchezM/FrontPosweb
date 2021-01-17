@@ -24,16 +24,7 @@ const AuthState = props =>{
             console.log('auth response ',response);
 
             if(!response.ok){
-                console.log(response.data)
-                const alerta = {
-                    msg: 'Credenciales incorrectas',
-                    tipoAlerta: 'alert-danger alert-dismissible fade show'
-                }
-                
-                dispatch({
-                    type: LOGIN_ERROR,
-                    payload: alerta
-                })
+                throw new Error('Credenciales incorrectas');
             }
 
             if(response.data.userDB){

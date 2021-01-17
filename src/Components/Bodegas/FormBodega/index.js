@@ -99,7 +99,7 @@ export default function FormularioBodega(){
                         <div className="errores">
                             {errorbodega ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
-                        {alerta ? 
+                        {alerta && 
                             (
                                 <div className={`alert ${alerta.tipoAlerta}`}>
                                     {alerta.msg}
@@ -107,7 +107,8 @@ export default function FormularioBodega(){
                                         <span aria-hidden="true">X</span>
                                     </button>
                                 </div>
-                            ): null} 
+                            )
+                        } 
                     <form onSubmit={handleSubmit}>
                         <div className="form-group col-md-8">
                             <label htmlFor="codeWarehouse">Código de Bodega</label>
