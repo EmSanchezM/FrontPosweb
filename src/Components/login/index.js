@@ -74,7 +74,7 @@ export default function Login(){
                 {alerta &&
                     (
                     <div className={`alert ${alerta.tipoAlerta}`}>
-                        {alerta.msg ? 'Credenciales incorrectas': null}
+                        {alerta.msg && 'Credenciales incorrectas'}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">X</span>
                         </button>

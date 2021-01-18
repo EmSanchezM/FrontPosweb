@@ -90,7 +90,15 @@ export default function AddProductoOrdenCompra() {
             agregarProductoOrdenCompra(productoFields, idOrdenCompra);
             mostrarAlerta('Producto agregado a la orden de compra', 'alert-success');
             
-            history.push('/admin/ordenescompras/detalle');
+            //history.push('/admin/ordenescompras/detalle');
+            setProductoFields([{
+                index: uuidv4(),
+                productId: '',
+                cuantity: 0,
+                cost: 0,
+                tax: 0,
+                discount: 0
+            }])
         }
         
     }
@@ -146,63 +154,62 @@ export default function AddProductoOrdenCompra() {
                                                 onChange={e=> handleChangeInput(productoField.index, e)}
                                             />
                                         </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cost">Costo</label>
-                                        <input 
-                                            name="cost"
-                                            type="number"
-                                            placeholder="Costo"
-                                            className="form-control"
-                                            value={productoField.cost}
-                                            onChange={e=> handleChangeInput(productoField.index, e)}
-                                        />
+                                        <div className="form-group">
+                                            <label htmlFor="cost">Costo</label>
+                                            <input 
+                                                name="cost"
+                                                type="number"
+                                                placeholder="Costo"
+                                                className="form-control"
+                                                value={productoField.cost}
+                                                onChange={e=> handleChangeInput(productoField.index, e)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="tax">Tax</label>
+                                            <input 
+                                                name="tax"
+                                                className="form-control"
+                                                type="number"
+                                                placeholder="Tax"
+                                                value={productoField.tax}
+                                                onChange={e=> handleChangeInput(productoField.index, e)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="discount">Descuento</label>
+                                            <input
+                                                name="discount"
+                                                className="form-control" 
+                                                type="number"
+                                                placeholder="Descuento"
+                                                value={productoField.discount}
+                                                onChange={e=> handleChangeInput(productoField.index, e)}
+                                            />
+                                        </div>
+                                        <div className="form-group mt-2">
+                                            <button
+                                                data-toggle="tooltip" 
+                                                className="btn btn-sm btn-success"
+                                                data-original-title="Productos"
+                                                onClick={()=>handleAddFields(productoField.index)}
+                                            ><i className="ti-plus"></i></button>
+                                            <button
+                                                data-toggle="tooltip" 
+                                                className="btn btn-sm btn-danger"
+                                                data-original-title="Borrar"
+                                                disabled={productoFields.length === 1}
+                                                onClick={()=>handleRemoveFields(productoField.index)}
+                                            ><i className="ti-trash"></i></button>
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="tax">Tax</label>
-                                        <input 
-                                            name="tax"
-                                            className="form-control"
-                                            type="number"
-                                            placeholder="Tax"
-                                            value={productoField.tax}
-                                            onChange={e=> handleChangeInput(productoField.index, e)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="discount">Descuento</label>
-                                        <input
-                                            name="discount"
-                                            className="form-control" 
-                                            type="number"
-                                            placeholder="Descuento"
-                                            value={productoField.discount}
-                                            onChange={e=> handleChangeInput(productoField.index, e)}
-                                        />
-                                    </div>
-                                    <div className="form-group mt-2">
-                                        <button
-                                            data-toggle="tooltip" 
-                                            className="btn btn-sm btn-success"
-                                            data-original-title="Productos"
-                                            onClick={()=>handleAddFields(productoField.index)}
-                                        ><i className="ti-plus"></i></button>
-                                        <button
-                                            data-toggle="tooltip" 
-                                            className="btn btn-sm btn-danger"
-                                            data-original-title="Borrar"
-                                            disabled={productoFields.length === 1}
-                                            onClick={()=>handleRemoveFields(productoField.index)}
-                                        ><i className="ti-trash"></i></button>
-                                    </div>
-                
-                                    </div>
-                                    
                                 </div>
                                     
                                 ))}
                                 <div className="form-group row m-b-0">
                                     <div className="offset-sm-12 col-sm-10">
                                         <button
+                                            type="submit"
                                             data-toggle="tooltip" 
                                             className="btn btn-sm btn-primary"
                                             data-original-title="Enviar"
@@ -214,8 +221,7 @@ export default function AddProductoOrdenCompra() {
                         </div>
                     </div>
                 </div>
-            </div>        
-        
+            </div>                
         </>
     )
 }

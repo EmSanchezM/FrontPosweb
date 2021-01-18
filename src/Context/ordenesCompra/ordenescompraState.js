@@ -74,27 +74,32 @@ const OrdenCompraState = props => {
     }
 
     const agregarProductoOrdenCompra = async (productoOrdenCompra, idOrdenCompra) => {
-        console.log(productoOrdenCompra);
-        const { productId, cuantity, cost, tax, discount } = productoOrdenCompra;
+        console.log('state ', productoOrdenCompra);
+        
+        /*productoOrdenCompra.forEach(productOrden=>{
+            let saveProductoOrden = {
+                purchaseOrderId: idOrdenCompra,
+                productId: productOrden.productId,
+                cuantity: productOrden.cuantity,
+                cost: productOrden.cost,
+                tax: productOrden.tax,
+                discount: productOrden.discount
+            }
+            console.log(saveProductoOrden)
+        });*/
 
-        let saveProductoOrden = {
-            purchaseOrderId: idOrdenCompra,
-            productId,
-            cuantity,
-            cost,
-            tax,
-            discount
-        }
+        productoOrdenCompra.purchaseOrderId = idOrdenCompra;
 
         try {
-            const response = await Axios.post('purchase_order_details', saveProductoOrden);
-            console.log('response ', response);
+            const response = await Axios.post('purchase_order_details', productoOrdenCompra);
+                console.log('response ', response);
             if(response.ok){
                 dispatch({
                     type: AGREGAR_PRODUCTO_ORDEN_COMPRA,
                     payload: productoOrdenCompra
                 })
             }
+            
         } catch (error) {
             console.log(error);
         }

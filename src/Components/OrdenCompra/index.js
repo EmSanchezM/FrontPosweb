@@ -16,8 +16,8 @@ export default function OrdenesCompras(){
     
     let confirm;
     const [ loop ] = useState(0);
-    const [consulta, setConsulta] = useState('');
-    const [filterOrdenCompra, setFilterOrdenCompra] = useState(ordenescompras);
+    const [ consulta, setConsulta ] = useState('');
+    const [ filterOrdenCompra, setFilterOrdenCompra ] = useState(ordenescompras);
 
     /*eslint-disable*/
     useEffect(()=>{
