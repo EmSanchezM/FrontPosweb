@@ -73,7 +73,7 @@ const OrdenCompraState = props => {
         }
     }
 
-    const agregarProductoOrdenCompra = async (productoOrdenCompra, idOrdenCompra) => {
+    const agregarProductoOrdenCompra = async (productoOrdenCompra) => {
         console.log('state ', productoOrdenCompra);
         
         /*productoOrdenCompra.forEach(productOrden=>{
@@ -88,7 +88,7 @@ const OrdenCompraState = props => {
             console.log(saveProductoOrden)
         });*/
 
-        productoOrdenCompra.purchaseOrderId = idOrdenCompra;
+        //productoOrdenCompra.purchaseOrderId = idOrdenCompra;
 
         try {
             const response = await Axios.post('purchase_order_details', productoOrdenCompra);

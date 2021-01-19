@@ -19,9 +19,10 @@ export default function AddProductoOrdenCompra() {
     const { productos, obtenerProductos } = ProductoContext;
 
     const OrdenesCompraContext = useContext(ordenesCompraContext);
-    const { agregarProductoOrdenCompra } = OrdenesCompraContext;
+    const { errorproductoordencompra, agregarProductoOrdenCompra } = OrdenesCompraContext;
 
     const [productoFields, setProductoFields ] = useState([{
+        purchaseOrderId: ordenId,
         index: uuidv4(),
         productId: '',
         cuantity: 0,
@@ -52,6 +53,7 @@ export default function AddProductoOrdenCompra() {
         setProductoFields([
             ...productoFields, 
             { 
+                purchaseOrderId: ordenId,
                 index: uuidv4(),
                 productId: '',
                 cuantity: 0,
@@ -64,20 +66,24 @@ export default function AddProductoOrdenCompra() {
 
     const handleRemoveFields = id => {
         const values = [...productoFields];
-        values.splice(values.findIndex(value=> value.id === id), 1);
+        values.splice(values.findIndex(value=> value.index === id), 1);
         setProductoFields(values);
     }
 
     const handleProductSubmit = (e) => {
         e.preventDefault();
         console.log('orden ',ordenId)
+        console.log('error ',errorproductoordencompra)
         console.log('productos', productoFields);
         
-        agregarProductoOrdenCompra(productoFields, ordenId);
-        mostrarAlerta('Producto agregado a la orden de compra', 'alert-success');
+        agregarProductoOrdenCompra(productoFields);
+        if(!errorproductoordencompra){
+            mostrarAlerta('Producto agregado a la orden de compra', 'alert-success');
+        }
         
         history.push(`/admin/orden-compra/${ordenId}`);
         setProductoFields([{
+            purchaseOrderId: '',
             index: uuidv4(),
             productId: '',
             cuantity: 0,
@@ -172,19 +178,19 @@ export default function AddProductoOrdenCompra() {
                                             />
                                         </div>
                                         <div className="form-group mt-2">
-                                            <button
+                                            <div
                                                 data-toggle="tooltip" 
                                                 className="btn btn-sm btn-success"
                                                 data-original-title="Add Productos"
-                                                onClick={()=>handleAddFields(productoField.index)}
-                                            ><i className="ti-plus"></i></button>
-                                            <button
+                                                onClick={handleAddFields}
+                                            ><i className="ti-plus"></i></div>
+                                            <div
                                                 data-toggle="tooltip" 
                                                 className="btn btn-sm btn-danger"
                                                 data-original-title="Borrar"
                                                 disabled={productoFields.length === 1}
                                                 onClick={()=>handleRemoveFields(productoField.index)}
-                                            ><i className="ti-trash"></i></button>
+                                            ><i className="ti-trash"></i></div>
                                         </div>
                                     </div>
                                 </div>
