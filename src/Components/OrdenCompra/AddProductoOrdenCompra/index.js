@@ -72,12 +72,11 @@ export default function AddProductoOrdenCompra() {
 
     const handleProductSubmit = (e) => {
         e.preventDefault();
-        console.log('orden ',ordenId)
-        console.log('error ',errorproductoordencompra)
+        
         console.log('productos', productoFields);
         
         agregarProductoOrdenCompra(productoFields);
-        if(!errorproductoordencompra){
+        if(errorproductoordencompra===false){
             mostrarAlerta('Producto agregado a la orden de compra', 'alert-success');
         }
         

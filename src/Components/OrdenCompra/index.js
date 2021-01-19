@@ -148,7 +148,7 @@ export default function OrdenesCompras(){
                                                                 className="btn btn-sm btn-info"
                                                                 data-original-title="Productos"
                                                                 onClick={()=>seleccionarOrdenCompra(ordencompra)}
-                                                            ><i className="ti-plus"></i></button>
+                                                            ><i className="ti-shopping-cart"></i></button>
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"

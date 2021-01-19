@@ -25,8 +25,9 @@ export default function Compras(){
     /*eslint-enable*/
 
     useMemo(()=>{
+        /*${compra.warehouseId}*/
         const result = compras.filter(compra=>{
-            return `${compra.warehouseId}`
+            return `${compra.codePurchase}`
                     .toLowerCase()
                     .includes(consulta.toLowerCase())
         })
