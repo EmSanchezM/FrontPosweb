@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route } from 'react-router-dom';
 
 //Componentes
 import Header from '../../Components/Layouts/Header/Header';
@@ -64,8 +64,8 @@ export default function PanelAdmin() {
                             <Route exact path={`/admin/bodegas/nueva`} component={FormularioBodega}/>
                             <Route exact path={`/admin/ordenescompras`} component={OrdenesCompras}/>
                             <Route exact path={`/admin/ordenescompras/nueva`} component={FormularioOrdenCompra}/>
-                            <Route exact path={`/admin/ordenescompras/productos`} component={AddProductoOrdenCompra}/>
-                            <Route exact path={`/admin/ordenescompras/detalle`} component={ProductosOrdenCompra}/>
+                            <Route exact path={`/admin/orden-compra/:ordenId/productos`} component={AddProductoOrdenCompra}/>
+                            <Route exact path={`/admin/orden-compra/:id`} component={ProductosOrdenCompra}/> 
                             <Route exact path={`/admin/compras`} component={Compras}/>
                             <Route exact path={`/admin/compras/nueva`} component={FormularioCompra}/>
                             

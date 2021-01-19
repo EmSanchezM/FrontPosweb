@@ -1,5 +1,5 @@
 import React,  { useContext, useEffect, useState, useMemo } from 'react';
-//import { Link, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import ordenesCompraContext from '../../../Context/ordenesCompra/ordenescompraContext';
 //import alertaContext from '../../../Context/alertas/alertaContext';
@@ -7,9 +7,10 @@ import ordenesCompraContext from '../../../Context/ordenesCompra/ordenescompraCo
 export default function ProductosOrdenCompra() {
 
     //const history = useHistory();
+    const { id } = useParams();
 
     const OrdenesCompraContext = useContext(ordenesCompraContext);
-    const { ordencompraseleccionada, getProductosOrdenCompra, productosordencompra } = OrdenesCompraContext;
+    const { getProductosOrdenCompra, productosordencompra } = OrdenesCompraContext;
 
     //const AlertaContext = useContext(alertaContext);
     //const { alerta, mostrarAlerta } = AlertaContext;
@@ -20,21 +21,19 @@ export default function ProductosOrdenCompra() {
 
     /*eslint-disable*/
     useEffect(() => {
-        if(ordencompraseleccionada !== null){
-            getProductosOrdenCompra(ordencompraseleccionada);
-        }
-        
+       
+        getProductosOrdenCompra(id);
+         
     }, []);
 
     useEffect(() => {
-        //console.log(ordencompraseleccionada);
-        if(ordencompraseleccionada != null){
+        if(id != null){
             setProductosOrdenCompra(productosordencompra);
         }else{
             setProductosOrdenCompra([]);
         }
         
-    }, [ordencompraseleccionada]);
+    }, [id]);
     /*eslint-enable*/
 
     useMemo(()=>{

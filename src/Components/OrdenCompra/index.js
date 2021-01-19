@@ -36,12 +36,12 @@ export default function OrdenesCompras(){
 
     const seleccionarOrdenCompra = ordencompra => {
         guardarOrdenCompraActual(ordencompra);
-        history.push('/admin/ordenescompras/productos');
+        history.push(`/admin/orden-compra/${ordencompra._id}/productos`);
     }
 
     const verProductosOrden = ordencompra => {
         guardarOrdenCompraActual(ordencompra);
-        history.push('/admin/ordenescompras/detalle');
+        history.push(`/admin/orden-compra/${ordencompra._id}`);
     }
 
     const onClickEliminar = ordencompra => {
@@ -131,7 +131,7 @@ export default function OrdenesCompras(){
                                                     return(
                                                     <tr key={ordencompra._id}>  
                                                         <td>{ordencompra.codePurchaseOrder}</td>
-                                                        <td className="">{ordencompra.status}</td>
+                                                        <td>{ordencompra.status}</td>
                                                         <td>{ordencompra.typePaid}</td>
                                                         <td>{ordencompra.typeShip}</td>
                                                         <td>{ordencompra.costShip} Lps</td>

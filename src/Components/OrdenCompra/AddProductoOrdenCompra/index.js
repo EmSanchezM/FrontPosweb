@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import ordenesCompraContext from '../../../Context/ordenesCompra/ordenescompraContext';
@@ -8,6 +8,7 @@ import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function AddProductoOrdenCompra() {
     const history = useHistory();
+    const { ordenId } = useParams();
 
     const [ loop ] = useState(0);
 
@@ -18,11 +19,7 @@ export default function AddProductoOrdenCompra() {
     const { productos, obtenerProductos } = ProductoContext;
 
     const OrdenesCompraContext = useContext(ordenesCompraContext);
-    const { agregarProductoOrdenCompra, ordencompraseleccionada } = OrdenesCompraContext;
-
-    const [idOrdenCompra, setIdOrdenCompra ] = useState({
-        purchaseOrderId: ''
-    });
+    const { agregarProductoOrdenCompra } = OrdenesCompraContext;
 
     const [productoFields, setProductoFields ] = useState([{
         index: uuidv4(),
@@ -40,17 +37,6 @@ export default function AddProductoOrdenCompra() {
     }, [loop]);
     /*eslint-enable*/
 
-    useEffect(() => {
-        if(ordencompraseleccionada !== null){
-            console.log('orden seleccionada ',ordencompraseleccionada);
-        
-            setIdOrdenCompra({
-                purchaseOrderId: ordencompraseleccionada._id
-            })
-        }
-    }, [ordencompraseleccionada]);
-
-    
     const handleChangeInput = (id, e) => {
         const newProductoFields = productoFields.map( i => {
             if(id === i.index){
@@ -84,23 +70,21 @@ export default function AddProductoOrdenCompra() {
 
     const handleProductSubmit = (e) => {
         e.preventDefault();
+        console.log('orden ',ordenId)
         console.log('productos', productoFields);
         
-        if(ordencompraseleccionada !== null){
-            agregarProductoOrdenCompra(productoFields, idOrdenCompra);
-            mostrarAlerta('Producto agregado a la orden de compra', 'alert-success');
-            
-            //history.push('/admin/ordenescompras/detalle');
-            setProductoFields([{
-                index: uuidv4(),
-                productId: '',
-                cuantity: 0,
-                cost: 0,
-                tax: 0,
-                discount: 0
-            }])
-        }
+        agregarProductoOrdenCompra(productoFields, ordenId);
+        mostrarAlerta('Producto agregado a la orden de compra', 'alert-success');
         
+        history.push(`/admin/orden-compra/${ordenId}`);
+        setProductoFields([{
+            index: uuidv4(),
+            productId: '',
+            cuantity: 0,
+            cost: 0,
+            tax: 0,
+            discount: 0
+        }])
     }
     
     return (
@@ -191,7 +175,7 @@ export default function AddProductoOrdenCompra() {
                                             <button
                                                 data-toggle="tooltip" 
                                                 className="btn btn-sm btn-success"
-                                                data-original-title="Productos"
+                                                data-original-title="Add Productos"
                                                 onClick={()=>handleAddFields(productoField.index)}
                                             ><i className="ti-plus"></i></button>
                                             <button
