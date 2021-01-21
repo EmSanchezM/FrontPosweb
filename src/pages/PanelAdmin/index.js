@@ -32,6 +32,7 @@ import OrdenesCompras from '../../Components/OrdenCompra';
 import FormularioOrdenCompra from '../../Components/OrdenCompra/FormOrdenCompra';
 import AddProductoOrdenCompra from '../../Components/OrdenCompra/AddProductoOrdenCompra';
 import ProductosOrdenCompra from '../../Components/OrdenCompra/VerProductoOrdenCompra';
+import OrdenCompraPDF from '../../Components/OrdenCompra/Pdf';
 
 //CRUD de compras
 import Compras from '../../Components/Compras';
@@ -65,7 +66,8 @@ export default function PanelAdmin() {
                             <Route exact path={`/admin/ordenescompras`} component={OrdenesCompras}/>
                             <Route exact path={`/admin/ordenescompras/nueva`} component={FormularioOrdenCompra}/>
                             <Route exact path={`/admin/orden-compra/:ordenId/productos`} component={AddProductoOrdenCompra}/>
-                            <Route exact path={`/admin/orden-compra/:id`} component={ProductosOrdenCompra}/> 
+                            <Route exact path={`/admin/orden-compra/:id`} component={ProductosOrdenCompra}/>
+                            <Route exact path='/admin/orden-compra/pdf' compornent={OrdenCompraPDF}/> 
                             <Route exact path={`/admin/compras`} component={Compras}/>
                             <Route exact path={`/admin/compras/nueva`} component={FormularioCompra}/>
                             

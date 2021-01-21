@@ -44,6 +44,7 @@ const OrdenCompraState = props => {
     const getProductosOrdenCompra = async (ordencompra) => {
         try {
             const response = await Axios.get(`purchase_order_details/${ordencompra}`);
+            console.log('response get ', response.data.productsDetails[0]);
             dispatch({
                 type: PRODUCTOS_ORDEN_COMPRA,
                 payload: response.data.productsDetails
